@@ -1,0 +1,39 @@
+{
+  "name": "@ngx-plus/admin",
+  "version": "0.0.0",
+  "description": "Realtime Angular Admin",
+  "scripts": {
+    "clean": "node bin/clean",
+    "dev": "lerna run dev --stream",
+    "preinstall": "npm install -g lerna nodemon",
+    "postinstall": "lerna bootstrap",
+    "update": "ncu -a && npm update && lerna exec \"ncu -a && npm update\""
+  },
+  "keywords": [
+    "angular",
+    "angular 2",
+    "angular 4",
+    "loopback",
+    "fireloop",
+    "realtime",
+    "mean",
+    "full stack",
+    "full-stack",
+    "admin",
+    "module",
+    "mongo",
+    "mongodb",
+    "node",
+    "ngx",
+    "ngx-plus",
+    "express",
+    "static",
+    "lerna"
+  ],
+  "author": "Brannon N. Darby II (logic) <bdarby86@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^2.0.0"
+  },
+  "dependencies": {}
+}

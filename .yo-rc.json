@@ -1,0 +1,23 @@
+{
+  "generator-fireloop": {
+    "version": "1.0.0-beta.2.5",
+    "clients": {
+      "api": {
+        "path": "./apps/api-server",
+        "type": "server"
+      },
+      "webapp": {
+        "path": "./apps/webapp",
+        "type": "ng2web",
+        "name": "webapp",
+        "sdkPath": "packages\\sdk\\src"
+      }
+    },
+    "promptValues": {
+      "sdkFeatures": [
+        "Enable PubSub + IO + FireLoop functionality",
+        "Enable NGRX functionality"
+      ]
+    }
+  }
+}

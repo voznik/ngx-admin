@@ -1,0 +1,37 @@
+<nav *ngIf="ui.headerActive"
+     class="navbar navbar-light fixed-top bg-faded">
+  <div class="navbar-brand">
+    ngx
+    <img *ngIf="ui.headerImg"
+         [src]="ui.headerImg"
+         height="50px" /> plus
+  </div>
+  <button *ngIf="ui.sidebarActive"
+          class="btn btn-sm btn-success sidebar-toggle"
+          (click)="ui.toggleSidebar()">
+    <i [class]="'fa fa-lg fa-chevron-' + (ui.sidebarOpen ? 'left pr-1' : 'right pl-1')"></i>
+  </button>
+  <div *ngIf="userApi.isAuthenticated()">
+    <div *ngIf="user"
+         ngbDropdown
+         class="nav-user-drop ml-auto">
+      <a id="drop1"
+         ngbDropdownToggle>
+        <div class="img-wrap">
+          <img src="assets/img/ngx-plus.svg"
+               height="54px"
+               width="54px"
+               class="img-avatar" />
+        </div>
+        &nbsp; {{ user.fullName }}
+      </a>
+      <div class="dropdown-menu"
+           aria-labelledby="drop1">
+        <button class="dropdown-item"
+                (click)="logout()">
+             <i class="fa fa-fw fa-sign-out"></i> Log Out
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

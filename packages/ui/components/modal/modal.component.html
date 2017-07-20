@@ -1,0 +1,15 @@
+<div class="modal-header bg-primary">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button"
+          class="close"
+          aria-label="Close"
+          (click)="handleAction({ type: 'close' })">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <admin-form [config]="formConfig"
+              [item]="item"
+              (action)="handleAction($event)">
+  </admin-form>
+</div>

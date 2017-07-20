@@ -1,0 +1,39 @@
+<admin-card cardTitle="Users"
+            icon="users"
+            [createButton]="service.getCardButtons()"
+            (action)="create()">
+  <table *ngIf="items"
+         class="table table-striped table-sm"
+         [class.table-responsive]="!ui.isLargeScreen">
+    <thead>
+      <tr>
+        <th *ngFor="let header of service.tableColumns">{{ header.label }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.fullName }}</td>
+        <td>{{ item.email }}</td>
+        <td nowrap>
+          <button type="button"
+                  class="btn btn-secondary btn-sm"
+                  (click)="handleAction({ type: 'viewRoles', payload: item})">
+            <span class="badge badge-info">{{ item?.roles?.length || 0 | number }}</span>
+              Roles
+            <i class="fa fa-fw fa-search"></i>
+          </button>
+          <button type="button"
+                  class="btn btn-primary btn-sm"
+                  (click)="handleAction({ type: 'update', payload: item})">
+            <i class="fa fa-fw fa-edit"></i>
+          </button>
+          <button type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="handleAction({ type: 'delete', payload: item})">
+            <i class="fa fa-fw fa-trash-o"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</admin-card>
