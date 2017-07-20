@@ -1,24 +1,14 @@
 * * *
 
-<h3 align="center">
+<h2 align="center">
+
+<img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus-light.png" width="150px" />
 
 ```console
-            .___      .__        
- _____    __| _/_____ |__| ____  
-\__  \  / __ |/     \|  |/    \
-  / __ \/ /_/ |  Y Y  \  |   |  \
- (____  |____ |__|_|  /__|___|  /
-     \/     \/     \/        \/
-           @ngx-plus/admin
+@ngx-plus/admin
 ```
 
-</h3>
-
-* * *
-
-<h3 align="center">
-<img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus-light.png" width="150px" />
-</h3>
+</h2>
 
 # Features
 
@@ -51,7 +41,7 @@
 ### Clone the Repo
 
 ```sh
-> git clone https://github.com/mean-expert-official/fire-starter.git
+> git clone https://github.com/ngx-plus/admin.git
 ```
 
 # Install
