@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "description": "Realtime Angular Admin",
   "scripts": {
+    "build": "cd apps/webapp/ && npm run build",
     "clean": "node bin/clean",
     "dev": "lerna run dev --stream",
-    "preinstall": "npm install -g lerna nodemon",
     "postinstall": "lerna bootstrap",
+    "sdk": "fireloop sdk",
+    "test": "cd apps/api-server/ && npm run test",
     "update": "ncu -a && npm update && lerna exec \"ncu -a && npm update\""
   },
   "keywords": [
