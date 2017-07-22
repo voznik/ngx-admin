@@ -64,7 +64,7 @@ export class LoginComponent {
       .login(event.payload)
       .subscribe(
       (data) => {
-        this.router.navigate(['home'])
+        this.router.navigate(['dashboard'])
         this.ui.toastSuccess('Login Success', `You are logged in as <u><i>${event.payload.email}</u></i>.`)
       },
       (err) => {

@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { HomeComponent } from './home.component'
-import { TodoComponent } from './todo/todo.component'
+import { DashboardComponent } from './dashboard.component'
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: DashboardComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'todos', component: TodoComponent },
+      { path: 'dashboard', component: DashboardComponent },
     ]
   }
 ]
@@ -22,4 +21,4 @@ const routes: Routes = [
     RouterModule,
   ],
 })
-export class HomeRoutingModule { }
+export class DashboardRoutingModule { }

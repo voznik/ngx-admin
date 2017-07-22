@@ -34,7 +34,7 @@ import 'rxjs/add/operator/map'
     </div>
   </admin-card>
   `,
-  styleUrls: ['../admin.component.scss']
+  styleUrls: ['./dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnDestroy {
