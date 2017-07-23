@@ -14,6 +14,7 @@
     ],
     "paths": {
       "@angular/*": [ "node_modules/@angular/*" ],
+      "@ngrx/*": [ "node_modules/@ngrx/*" ],
       "@ngx-plus/*": [ "node_modules/@ngx-plus/*" ],
       "rxjs/*": [ "node_modules/rxjs/*" ]
     },

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { DashCard } from '@ngx-plus/admin-ui'
+import { DashCard, AdminUi } from '@ngx-plus/admin-ui'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -44,6 +44,7 @@ export class DashboardComponent implements OnDestroy {
 
   constructor(
     private store: Store<any>,
+    private ui: AdminUi,
   ) {
     this.admin$ = this.store.select('admin')
     this.setDashCards()
