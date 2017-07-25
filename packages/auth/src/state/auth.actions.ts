@@ -1,132 +1,146 @@
 import { Action } from '@ngrx/store'
 
-export const ActionTypes = {
-  AUTH_LOGIN:                 'AUTH_LOGIN',
-  AUTH_LOGIN_ERROR:           'AUTH_LOGIN_ERROR',
-  AUTH_LOGIN_SUCCESS:         'AUTH_LOGIN_SUCCESS',
-  AUTH_LOGOUT:                'AUTH_LOGOUT',
-  AUTH_LOGOUT_ERROR:          'AUTH_LOGOUT_ERROR',
-  AUTH_LOGOUT_SUCCESS:        'AUTH_LOGOUT_SUCCESS',
-  AUTH_PASS_REQUEST:          'AUTH_PASS_REQUEST',
-  AUTH_PASS_REQUEST_ERROR:    'AUTH_PASS_REQUEST_ERROR',
-  AUTH_PASS_REQUEST_SUCCESS:  'AUTH_PASS_REQUEST_SUCCESS',
-  AUTH_PASS_VERIFY:           'AUTH_PASS_VERIFY',
-  AUTH_PASS_VERIFY_ERROR:     'AUTH_PASS_VERIFY_ERROR',
-  AUTH_PASS_VERIFY_SUCCESS:   'AUTH_PASS_VERIFY_SUCCESS',
-  AUTH_REGISTER:              'AUTH_REGISTER',
-  AUTH_REGISTER_ERROR:        'AUTH_REGISTER_ERROR',
-  AUTH_REGISTER_SUCCESS:      'AUTH_REGISTER_SUCCESS',
-  AUTH_CHECK_TOKEN:           'AUTH_CHECK_TOKEN',
-  AUTH_CHECK_TOKEN_ERROR:     'AUTH_CHECK_TOKEN_ERROR',
-  AUTH_CHECK_TOKEN_SUCCESS:   'AUTH_CHECK_TOKEN_SUCCESS',
-}
+export const LOG_IN = '[Auth] LogIn'
+export const LOG_IN_SUCCESS = '[Auth] LogIn Success'
+export const LOG_IN_FAIL = '[Auth] LogIn Fail'
+
+export const LOG_OUT = '[Auth] LogOut'
+export const LOG_OUT_SUCCESS = '[Auth] LogOut Success'
+export const LOG_OUT_FAIL = '[Auth] LogOut Fail'
+
+export const PW_REQUEST = '[Auth] PWRequest'
+export const PW_REQUEST_SUCCESS = '[Auth] PWRequest Success'
+export const PW_REQUEST_FAIL = '[Auth] PWRequest Fail'
+
+export const PW_VERIFY = '[Auth] PWVerify'
+export const PW_VERIFY_SUCCESS = '[Auth] PWVerify Success'
+export const PW_VERIFY_FAIL = '[Auth] PWVerify Fail'
+
+export const REGISTER = '[Auth] Register'
+export const REGISTER_SUCCESS = '[Auth] Register Success'
+export const REGISTER_FAIL = '[Auth] Register Fail'
+
+export const CHECK_TOKEN = '[Auth] CheckToken'
+export const CHECK_TOKEN_SUCCESS = '[Auth] CheckToken Success'
+export const CHECK_TOKEN_FAIL = '[Auth] CheckToken Fail'
 
 type credentials = {
-  realm: string,
   email: string,
   password: string,
 }
 
-/** LOGIN **/
-export class AuthLoginAction implements Action {
-  type = ActionTypes.AUTH_LOGIN
+/** LOG_IN **/
+export class LogIn implements Action {
+  public readonly type = LOG_IN
   constructor(public payload: credentials) { }
 }
-export class AuthLoginErrorAction implements Action {
-  type = ActionTypes.AUTH_LOGIN_ERROR
-  constructor(public payload: any) { }
-}
-export class AuthLoginSuccessAction implements Action {
-  type = ActionTypes.AUTH_LOGIN_SUCCESS
+
+export class LogInSuccess implements Action {
+  public readonly type = LOG_IN_SUCCESS
   constructor(public payload: any) { }
 }
 
-/** LOGOUT **/
-export class AuthLogoutAction implements Action {
-  type = ActionTypes.AUTH_LOGOUT
-  constructor(public payload: any = {}) { }
+export class LogInFail implements Action {
+  public readonly type = LOG_IN_FAIL
+  constructor(public payload: any) { }
 }
-export class AuthLogoutErrorAction implements Action {
-  type = ActionTypes.AUTH_LOGOUT_ERROR
-  constructor(public payload: any = {}) { }
+
+/** LOG_OUT **/
+export class LogOut implements Action {
+  public readonly type = LOG_OUT
+  constructor(public payload: any) { }
 }
-export class AuthLogoutSuccessAction implements Action {
-  type = ActionTypes.AUTH_LOGOUT_SUCCESS
-  constructor(public payload: any = {}) { }
+
+export class LogOutSuccess implements Action {
+  public readonly type = LOG_OUT_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class LogOutFail implements Action {
+  public readonly type = LOG_OUT_FAIL
+  constructor(public payload: any) { }
 }
 
 /** PASS_REQUEST **/
-export class AuthPassRequestAction implements Action {
-  type = ActionTypes.AUTH_PASS_REQUEST
+export class PWRequest implements Action {
+  public readonly type = PW_REQUEST
   constructor(public payload: any) { }
 }
-export class AuthPassRequestErrorAction implements Action {
-  type = ActionTypes.AUTH_PASS_REQUEST_ERROR
+
+export class PWRequestSuccess implements Action {
+  public readonly type = PW_REQUEST_SUCCESS
   constructor(public payload: any) { }
 }
-export class AuthPassRequestSuccessAction implements Action {
-  type = ActionTypes.AUTH_PASS_REQUEST_SUCCESS
+
+export class PWRequestFail implements Action {
+  public readonly type = PW_REQUEST_FAIL
   constructor(public payload: any) { }
 }
 
 /** PASS_VERIFY **/
-export class AuthPassVerifyAction implements Action {
-  type = ActionTypes.AUTH_PASS_VERIFY
+export class PWVerify implements Action {
+  public readonly type = PW_VERIFY
   constructor(public payload: any) { }
 }
-export class AuthPassVerifyErrorAction implements Action {
-  type = ActionTypes.AUTH_PASS_VERIFY_ERROR
+
+export class PWVerifySuccess implements Action {
+  public readonly type = PW_VERIFY_SUCCESS
   constructor(public payload: any) { }
 }
-export class AuthPassVerifySuccessAction implements Action {
-  type = ActionTypes.AUTH_PASS_VERIFY_SUCCESS
+
+export class PWVerifyFail implements Action {
+  public readonly type = PW_VERIFY_FAIL
   constructor(public payload: any) { }
 }
 
 /** REGISTER **/
-export class AuthRegisterAction implements Action {
-  type = ActionTypes.AUTH_REGISTER
-  constructor(public payload: any) { }
-}
-export class AuthRegisterErrorAction implements Action {
-  type = ActionTypes.AUTH_REGISTER_ERROR
-  constructor(public payload: any) { }
-}
-export class AuthRegisterSuccessAction implements Action {
-  type = ActionTypes.AUTH_REGISTER_SUCCESS
+export class Register implements Action {
+  public readonly type = REGISTER
   constructor(public payload: any) { }
 }
 
-/** AUTH_CHECK_TOKEN **/
-export class AuthCheckTokenAction implements Action {
-  type = ActionTypes.AUTH_CHECK_TOKEN
-  constructor(public payload: any) { }
-}
-export class AuthCheckTokenErrorAction implements Action {
-  type = ActionTypes.AUTH_CHECK_TOKEN_ERROR
-  constructor(public payload: any) { }
-}
-export class AuthCheckTokenSuccessAction implements Action {
-  type = ActionTypes.AUTH_CHECK_TOKEN_SUCCESS
+export class RegisterSuccess implements Action {
+  public readonly type = REGISTER_SUCCESS
   constructor(public payload: any) { }
 }
 
-export type Actions
-  = AuthLoginAction
-  | AuthLoginErrorAction
-  | AuthLoginSuccessAction
-  | AuthLogoutAction
-  | AuthLogoutErrorAction
-  | AuthLogoutSuccessAction
-  | AuthPassRequestAction
-  | AuthPassRequestErrorAction
-  | AuthPassRequestSuccessAction
-  | AuthPassVerifyAction
-  | AuthPassVerifyErrorAction
-  | AuthPassVerifySuccessAction
-  | AuthRegisterAction
-  | AuthRegisterErrorAction
-  | AuthRegisterSuccessAction
-  | AuthCheckTokenAction
-  | AuthCheckTokenErrorAction
-  | AuthCheckTokenSuccessAction
+export class RegisterFail implements Action {
+  public readonly type = REGISTER_FAIL
+  constructor(public payload: any) { }
+}
+
+/** CHECK_TOKEN **/
+export class CheckToken implements Action {
+  public readonly type = CHECK_TOKEN
+  constructor(public payload: any) { }
+}
+
+export class CheckTokenSuccess implements Action {
+  public readonly type = CHECK_TOKEN_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class CheckTokenFail implements Action {
+  public readonly type = CHECK_TOKEN_FAIL
+  constructor(public payload: any) { }
+}
+
+export type Actions =
+  | LogIn
+  | LogInSuccess
+  | LogInFail
+  | LogOut
+  | LogOutSuccess
+  | LogOutFail
+  | PWRequest
+  | PWRequestSuccess
+  | PWRequestFail
+  | PWVerify
+  | PWVerifySuccess
+  | PWVerifyFail
+  | Register
+  | RegisterSuccess
+  | RegisterFail
+  | CheckToken
+  | CheckTokenSuccess
+  | CheckTokenFail

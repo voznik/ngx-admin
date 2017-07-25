@@ -44,8 +44,6 @@ export class RoleFormComponent implements OnInit {
   handleAction(event) {
     switch (event.type) {
       case 'update':
-        const fullName = event.payload.firstName + ' ' + (event.payload.middleName || '') + ' ' + event.payload.lastName + ' ' + (event.payload.suffix || '')
-        event.payload.fullName = fullName.replace('  ', ' ')
         this.handleAction({ type: 'cancel' })
         return this.service.upsert(event.payload)
       case 'cancel':

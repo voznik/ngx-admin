@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class AdminAuth {
+export class AuthService {
 
   public headerImg = ''
   public preHeaderImg = 'ngx'

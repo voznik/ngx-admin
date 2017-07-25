@@ -5,10 +5,14 @@ import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
+import { UserActions, RoleActions, ControlActions } from '../state'
+
 @Component({
   selector: 'admin-dashboard',
   template: `
   <admin-card icon="tachometer" cardTitle="Dashboard">
+    <h4 class="text-primary">Admin</h4>
+    <hr />
     <div *ngIf="dashCards" class="row align-items-center justify-content-center">
       <div *ngFor="let item of dashCards" class="col-12 col-lg-4">
         <a class="dash-card" [routerLink]="item.link" routerLinkActive="active">
@@ -24,7 +28,7 @@ import 'rxjs/add/operator/map'
                 <div [class]="'card card-outline-' + item.class">
                   <div class="card-block text-center">
                     <h4 [class]="'card-title text-center mb-1 text-' + item.class">{{ item.name }}</h4>
-                    <h4 class="mb-0"><span [class]="'badge badge-' + item.class">{{ item.data | async }}</span></h4>
+                    <h4 class="mb-0"><span [class]="'badge badge-' + item.class">{{ (item.data | async) || 0 }}</span></h4>
                   </div>
                 </div>
             </div>
@@ -38,6 +42,7 @@ import 'rxjs/add/operator/map'
 })
 
 export class DashboardComponent implements OnDestroy {
+
   public dashCards: DashCard[]
   public admin$: Observable<any>
   private subscriptions: Subscription[] = new Array<Subscription>()
@@ -48,6 +53,9 @@ export class DashboardComponent implements OnDestroy {
   ) {
     this.admin$ = this.store.select('admin')
     this.setDashCards()
+    this.store.dispatch(new UserActions.ReadUsers({ include: 'roles' }))
+    this.store.dispatch(new RoleActions.ReadRoles({ include: 'principals' }))
+    this.store.dispatch(new ControlActions.ReadControls())
   }
 
   ngOnDestroy() {

@@ -1,9 +1,5 @@
-import { UserActionTypes, UserActions } from './user.actions';
-import { RoleActionTypes, RoleActions } from './role.actions';
-import { ControlActionTypes, ControlActions } from './control.actions';
+import * as ControlActions from './control.actions'
+import * as RoleActions from './role.actions'
+import * as UserActions from './user.actions'
 
-export {
-UserActionTypes, UserActions,
-RoleActionTypes, RoleActions,
-ControlActionTypes, ControlActions,
-}
+export { ControlActions, RoleActions, UserActions }

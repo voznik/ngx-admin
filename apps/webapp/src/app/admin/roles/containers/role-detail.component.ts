@@ -8,8 +8,8 @@ import { RolesService } from '../roles.service'
   selector: 'admin-role-detail',
   template: `
     <admin-card *ngIf="item"
-                [cardTitle]="item?.fullName"
-                [subTitle]="item?.email"
+                [cardTitle]="item?.name"
+                [subTitle]="item?.description"
                 icon="tag"
                 [nav]="tabs">
       <router-outlet></router-outlet>
@@ -21,10 +21,8 @@ export class RoleDetailComponent implements OnInit {
   public tabs: NavItem = {
     title: '',
     items: [
-      { icon: 'role', name: 'Profile', link: 'profile' },
-      { icon: 'key', name: 'Password', link: 'password' },
-      { icon: 'unlock', name: 'Access Tokens', link: 'access-tokens' },
-      { icon: 'tags', name: 'Roles', link: 'roles' },
+      { icon: 'pencil', name: 'Edit', link: 'edit' },
+      { icon: 'users', name: 'Users', link: 'users' },
     ]
   }
 
@@ -36,7 +34,7 @@ export class RoleDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.item = this.route.snapshot.data.systemRole[0]
+    this.item = this.route.snapshot.data.role[0]
     this.service.setSelected(this.item)
   }
 }

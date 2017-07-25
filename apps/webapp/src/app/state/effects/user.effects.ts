@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/startWith'
 
-import { UserActions, UserActionTypes, RoleActions } from '../actions'
+import * as UserActions from '../actions/user.actions'
 
 @Injectable()
 export class UserEffects {
@@ -26,66 +26,66 @@ export class UserEffects {
 
   @Effect()
   protected createUser: Observable<any> = this.actions$
-    .ofType(UserActionTypes.CREATE_USER)
-    .mergeMap((action: Action) => this.userApi.create(action.payload)
-      .map((response: Account) => new UserActions.createUserSuccess(response))
-      .catch((error: any) => of(new UserActions.createUserFail(error))))
+    .ofType(UserActions.CREATE_USER)
+    .mergeMap((action: UserActions.CreateUser) => this.userApi.create(action.payload)
+      .map((response: Account) => new UserActions.CreateUserSuccess(response))
+      .catch((error: any) => of(new UserActions.CreateUserFail(error))))
 
   @Effect({ dispatch: false })
   protected createUserSuccess = this.actions$
-    .ofType(UserActionTypes.CREATE_USER_SUCCESS)
-    .map(action => this.ui.toastSuccess('Create User Success', `User <u><i>${action.payload.email}</i></u> has been created successfully.`))
+    .ofType(UserActions.CREATE_USER_SUCCESS)
+    .map((action: UserActions.CreateUserSuccess) => this.ui.toastSuccess('Create User Success', `User <u><i>${action.payload.email}</i></u> has been created successfully.`))
 
   @Effect({ dispatch: false })
   protected createUserFail = this.actions$
-    .ofType(UserActionTypes.CREATE_USER_FAIL)
-    .map(action => this.ui.toastError('Create User Fail', `${action.payload.message}`))
+    .ofType(UserActions.CREATE_USER_FAIL)
+    .map((action: UserActions.CreateUserFail) => this.ui.toastError('Create User Fail', `${action.payload.message}`))
 
   @Effect()
   protected readUsers: Observable<any> = this.actions$
-    .ofType(UserActionTypes.READ_USERS)
-    .mergeMap((action: Action) => this.userApi.find(action.payload)
-      .map((response: Array<Account>) => new UserActions.readUsersSuccess(response))
-      .catch((error: any) => of(new UserActions.readUsersFail(error))))
+    .ofType(UserActions.READ_USERS)
+    .mergeMap((action: UserActions.ReadUsers) => this.userApi.find(action.payload)
+      .map((response: Array<Account>) => new UserActions.ReadUsersSuccess(response))
+      .catch((error: any) => of(new UserActions.ReadUsersFail(error))))
 
   @Effect()
   protected updateUser: Observable<any> = this.actions$
-    .ofType(UserActionTypes.UPDATE_USER)
-    .mergeMap((action: Action) => this.userApi.patchAttributes(action.payload.id, action.payload)
-      .map((response: Account) => new UserActions.updateUserSuccess(action.payload))
-      .catch((error: any) => of(new UserActions.updateUserFail(error))))
+    .ofType(UserActions.UPDATE_USER)
+    .mergeMap((action: UserActions.UpdateUser) => this.userApi.patchAttributes(action.payload.id, action.payload)
+      .map((response: Account) => new UserActions.UpdateUserSuccess(action.payload))
+      .catch((error: any) => of(new UserActions.UpdateUserFail(error))))
 
   @Effect({ dispatch: false })
   protected updateUserSuccess = this.actions$
-    .ofType(UserActionTypes.UPDATE_USER_SUCCESS)
-    .map(action => this.ui.toastSuccess('Update User Success', `User <u><i>${action.payload.email}</i></u> has been updated successfully.`))
+    .ofType(UserActions.UPDATE_USER_SUCCESS)
+    .map((action: UserActions.UpdateUserSuccess) => this.ui.toastSuccess('Update User Success', `User <u><i>${action.payload.email}</i></u> has been updated successfully.`))
 
   @Effect({ dispatch: false })
   protected updateUserFail = this.actions$
-    .ofType(UserActionTypes.UPDATE_USER_FAIL)
-    .map(action => this.ui.toastError('Update User Fail', `${action.payload.message}`))
+    .ofType(UserActions.UPDATE_USER_FAIL)
+    .map((action: UserActions.UpdateUserFail) => this.ui.toastError('Update User Fail', `${action.payload.message}`))
 
   @Effect()
   protected deleteUser: Observable<any> = this.actions$
-    .ofType(UserActionTypes.DELETE_USER)
-    .mergeMap((action: Action) => this.userApi.deleteById(action.payload.id)
-      .map((response: Account) => new UserActions.deleteUserSuccess(action.payload))
-      .catch((error: any) => of(new UserActions.deleteUserFail(error))))
+    .ofType(UserActions.DELETE_USER)
+    .mergeMap((action: UserActions.DeleteUser) => this.userApi.deleteById(action.payload.id)
+      .map((response: Account) => new UserActions.DeleteUserSuccess(action.payload))
+      .catch((error: any) => of(new UserActions.DeleteUserFail(error))))
 
   @Effect({ dispatch: false })
   protected deleteUserSuccess = this.actions$
-    .ofType(UserActionTypes.DELETE_USER_SUCCESS)
-    .map(action => this.ui.toastSuccess('Delete User Success', `User <u><i>${action.payload.email}</i></u> has been deleted successfully.`))
+    .ofType(UserActions.DELETE_USER_SUCCESS)
+    .map((action: UserActions.DeleteUserSuccess) => this.ui.toastSuccess('Delete User Success', `User <u><i>${action.payload.email}</i></u> has been deleted successfully.`))
 
   @Effect({ dispatch: false })
   protected deleteUserFail = this.actions$
-    .ofType(UserActionTypes.DELETE_USER_FAIL)
-    .map(action => this.ui.toastError('Delete User Fail', `${action.payload.message}`))
+    .ofType(UserActions.DELETE_USER_FAIL)
+    .map((action: UserActions.DeleteUserFail) => this.ui.toastError('Delete User Fail', `${action.payload.message}`))
 
   @Effect()
   protected addUserToRole: Observable<any> = this.actions$
-    .ofType(UserActionTypes.ADD_USER_TO_ROLE)
-    .mergeMap((action: Action) => this.userApi.linkRoles(
+    .ofType(UserActions.ADD_USER_TO_ROLE)
+    .mergeMap((action: UserActions.AddUserToRole) => this.userApi.linkRoles(
       action.payload.user.id,
       action.payload.role.id,
       {
@@ -93,37 +93,37 @@ export class UserEffects {
         principalId: action.payload.user.id,
         roleId: action.payload.role.id
       })
-      .map((response: any) => new UserActions.addUserToRoleSuccess({
+      .map((response: any) => new UserActions.AddUserToRoleSuccess({
         user: action.payload.user,
         role: action.payload.role,
         mapping: response
       }))
-      .catch((error: any) => of(new UserActions.addUserToRoleFail(error))))
+      .catch((error: any) => of(new UserActions.AddUserToRoleFail(error))))
 
   @Effect({ dispatch: false })
   protected addUserToRoleSuccess = this.actions$
-    .ofType(UserActionTypes.ADD_USER_TO_ROLE_SUCCESS)
-    .map(action => this.ui.toastSuccess('Role Added', `User <u><i>${action.payload.user.email}</i></u> has been successfully added to the <u><i>${action.payload.role.name}</i></u> role.`))
+    .ofType(UserActions.ADD_USER_TO_ROLE_SUCCESS)
+    .map((action: UserActions.AddUserToRoleSuccess) => this.ui.toastSuccess('Role Added', `User <u><i>${action.payload.user.email}</i></u> has been successfully added to the <u><i>${action.payload.role.name}</i></u> role.`))
 
   @Effect({ dispatch: false })
   protected addUserToRoleFail = this.actions$
-    .ofType(UserActionTypes.ADD_USER_TO_ROLE_FAIL)
-    .map(action => this.ui.toastError('Add Role Fail', `${action.payload.message}`))
+    .ofType(UserActions.ADD_USER_TO_ROLE_FAIL)
+    .map((action: UserActions.AddUserToRoleFail) => this.ui.toastError('Add Role Fail', `${action.payload.message}`))
 
   @Effect()
   protected deleteUserFromRole: Observable<any> = this.actions$
-    .ofType(UserActionTypes.DELETE_USER_FROM_ROLE)
-    .mergeMap((action: Action) => this.userApi.unlinkRoles(action.payload.user.id, action.payload.role.id)
-      .map((response: Account) => new UserActions.deleteUserFromRoleSuccess(action.payload))
-      .catch((error: any) => of(new UserActions.deleteUserFromRoleFail(error))))
+    .ofType(UserActions.DELETE_USER_FROM_ROLE)
+    .mergeMap((action: UserActions.DeleteUserFromRole) => this.userApi.unlinkRoles(action.payload.user.id, action.payload.role.id)
+      .map((response: Account) => new UserActions.DeleteUserFromRoleSuccess(action.payload))
+      .catch((error: any) => of(new UserActions.DeleteUserFromRoleFail(error))))
 
   @Effect({ dispatch: false })
   protected deleteUserFromRoleSuccess = this.actions$
-    .ofType(UserActionTypes.DELETE_USER_FROM_ROLE_SUCCESS)
-    .map(action => this.ui.toastSuccess('Role Removed', `User <u><i>${action.payload.user.email}</i></u> has been successfully removed from the <u><i>${action.payload.role.name}</i></u> role.`))
+    .ofType(UserActions.DELETE_USER_FROM_ROLE_SUCCESS)
+    .map((action: UserActions.DeleteUserFromRoleSuccess) => this.ui.toastSuccess('Role Removed', `User <u><i>${action.payload.user.email}</i></u> has been successfully removed from the <u><i>${action.payload.role.name}</i></u> role.`))
 
   @Effect({ dispatch: false })
   protected deleteUserFromRoleFail = this.actions$
-    .ofType(UserActionTypes.DELETE_USER_FROM_ROLE_FAIL)
-    .map(action => this.ui.toastError('Remove Role Fail', `${action.payload.message}`))
+    .ofType(UserActions.DELETE_USER_FROM_ROLE_FAIL)
+    .map((action: UserActions.DeleteUserFromRoleFail) => this.ui.toastError('Remove Role Fail', `${action.payload.message}`))
 }

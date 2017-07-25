@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
-import { AdminUi, NavItem } from '@ngx-plus/admin-ui';
-import { RealTime, AccountApi, FireLoopRef, Account, SDKToken } from '@ngx-plus/admin-sdk';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Router } from '@angular/router'
+import { AdminUi, NavItem } from '@ngx-plus/admin-ui'
+import { RealTime, AccountApi, FireLoopRef, Account, SDKToken } from '@ngx-plus/admin-sdk'
+import { Subscription } from 'rxjs/Subscription'
 
-import { AdminAuth } from './admin-auth'
+import { AuthService } from './auth.service'
 
 @Component({
   template: `
@@ -21,24 +21,24 @@ import { AdminAuth } from './admin-auth'
   `,
   styles: [`
     .row {
-      height: 75vh;
+      height: 75vh
     }
     .card-header hr {
-        border-color: transparent;
+        border-color: transparent
     }
     `]
 })
 export class AuthComponent implements OnInit, OnDestroy {
 
-  private subscriptions: Subscription[] = new Array<Subscription>();
-  public user: Account;
-  private userRef: FireLoopRef<Account>;
-  private token: any;
-  public nav: NavItem;
+  private subscriptions: Subscription[] = new Array<Subscription>()
+  public user: Account
+  private userRef: FireLoopRef<Account>
+  private token: any
+  public nav: NavItem
 
   constructor(
     private ui: AdminUi,
-    private auth: AdminAuth,
+    private auth: AuthService,
     private rt: RealTime,
     public userApi: AccountApi,
     public router: Router,
@@ -58,7 +58,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
   }
 
 }

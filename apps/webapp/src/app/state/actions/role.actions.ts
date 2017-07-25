@@ -1,96 +1,114 @@
-import { Action } from '@ngrx/store';
-import { type } from '../util';
-import { Role, LoopBackFilter } from '@ngx-plus/admin-sdk';
+import { Action } from '@ngrx/store'
+import { Role, LoopBackFilter } from '@ngx-plus/admin-sdk'
 
-export const RoleActionTypes = {
+export const CREATE_ROLE = '[Admin] CreateRole'
+export const CREATE_ROLE_SUCCESS = '[Admin] CreateRole Success'
+export const CREATE_ROLE_FAIL = '[Admin] CreateRole Fail'
 
-  CREATE_ROLE: type('[Admin] createRole'),
-  CREATE_ROLE_SUCCESS: type('[Admin] createRole success'),
-  CREATE_ROLE_FAIL: type('[Admin] createRole fail'),
+export const READ_ROLES = '[Admin] ReadRoles'
+export const READ_ROLES_SUCCESS = '[Admin] ReadRoles Success'
+export const READ_ROLES_FAIL = '[Admin] ReadRoles Fail'
 
-  READ_ROLES: type('[Admin] readRoles'),
-  READ_ROLES_SUCCESS: type('[Admin] readRoles success'),
-  READ_ROLES_FAIL: type('[Admin] readRoles fail'),
+export const UPDATE_ROLE = '[Admin] UpdateRole'
+export const UPDATE_ROLE_SUCCESS = '[Admin] UpdateRole Success'
+export const UPDATE_ROLE_FAIL = '[Admin] UpdateRole Fail'
 
-  UPDATE_ROLE: type('[Admin] updateRole'),
-  UPDATE_ROLE_SUCCESS: type('[Admin] updateRole success'),
-  UPDATE_ROLE_FAIL: type('[Admin] updateRole fail'),
+export const DELETE_ROLE = '[Admin] DeleteRole'
+export const DELETE_ROLE_SUCCESS = '[Admin] DeleteRole Success'
+export const DELETE_ROLE_FAIL = '[Admin] DeleteRole Fail'
 
-  DELETE_ROLE: type('[Admin] deleteRole'),
-  DELETE_ROLE_SUCCESS: type('[Admin] deleteRole success'),
-  DELETE_ROLE_FAIL: type('[Admin] deleteRole fail'),
+export const SELECT_ROLE = '[Admin] SelectRole'
+export const SELECT_ROLE_SUCCESS = '[Admin] SelectRole Success'
+export const SELECT_ROLE_FAIL = '[Admin] SelectRole Fail'
 
-  SELECT_ROLE: type('[Admin] selectRole'),
-  SELECT_ROLE_SUCCESS: type('[Admin] selectRole success'),
-  SELECT_ROLE_FAIL: type('[Admin] selectRole fail'),
+export class CreateRole implements Action {
+  public readonly type = CREATE_ROLE
+  constructor(public payload: Role) { }
+}
 
-};
+export class CreateRoleSuccess implements Action {
+  public readonly type = CREATE_ROLE_SUCCESS
+  constructor(public payload: Role) { }
+}
 
-export const RoleActions = {
+export class CreateRoleFail implements Action {
+  public readonly type = CREATE_ROLE_FAIL
+  constructor(public payload: any) { }
+}
 
-  createRole: class implements Action {
-    public readonly type = RoleActionTypes.CREATE_ROLE;
-    constructor(public payload: Role, public meta?: any) { }
-  },
+export class ReadRoles implements Action {
+  public readonly type = READ_ROLES
+  constructor(public payload: LoopBackFilter = {}) { }
+}
 
-  createRoleSuccess: class implements Action {
-    public readonly type = RoleActionTypes.CREATE_ROLE_SUCCESS;
-    constructor(public payload: Role, public meta?: any) { }
-  },
+export class ReadRolesSuccess implements Action {
+  public readonly type = READ_ROLES_SUCCESS
+  constructor(public payload: Role[]) { }
+}
 
-  createRoleFail: class implements Action {
-    public readonly type = RoleActionTypes.CREATE_ROLE_FAIL;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class ReadRolesFail implements Action {
+  public readonly type = READ_ROLES_FAIL
+  constructor(public payload: any) { }
+}
 
-  readRoles: class implements Action {
-    public readonly type = RoleActionTypes.READ_ROLES;
-    constructor(public payload: LoopBackFilter = {}, public meta?: any) { }
-  },
+export class UpdateRole implements Action {
+  public readonly type = UPDATE_ROLE
+  constructor(public payload: Role) { }
+}
 
-  readRolesSuccess: class implements Action {
-    public readonly type = RoleActionTypes.READ_ROLES_SUCCESS;
-    constructor(public payload: Role[], public meta?: any) { }
-  },
+export class UpdateRoleSuccess implements Action {
+  public readonly type = UPDATE_ROLE_SUCCESS
+  constructor(public payload: Role) { }
+}
 
-  readRolesFail: class implements Action {
-    public readonly type = RoleActionTypes.READ_ROLES_FAIL;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class UpdateRoleFail implements Action {
+  public readonly type = UPDATE_ROLE_FAIL
+  constructor(public payload: any) { }
+}
 
-  updateRole: class implements Action {
-    public readonly type = RoleActionTypes.UPDATE_ROLE;
-    constructor(public payload: Role, public meta?: any) { }
-  },
+export class DeleteRole implements Action {
+  public readonly type = DELETE_ROLE
+  constructor(public payload: any) { }
+}
 
-  updateRoleSuccess: class implements Action {
-    public readonly type = RoleActionTypes.UPDATE_ROLE_SUCCESS;
-    constructor(public payload: Role, public meta?: any) { }
-  },
+export class DeleteRoleSuccess implements Action {
+  public readonly type = DELETE_ROLE_SUCCESS
+  constructor(public payload: any) { }
+}
 
-  updateRoleFail: class implements Action {
-    public readonly type = RoleActionTypes.UPDATE_ROLE_FAIL;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class DeleteRoleFail implements Action {
+  public readonly type = DELETE_ROLE_FAIL
+  constructor(public payload: any) { }
+}
 
-  deleteRole: class implements Action {
-    public readonly type = RoleActionTypes.DELETE_ROLE;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class SelectRole implements Action {
+  public readonly type = SELECT_ROLE
+  constructor(public payload: Role) { }
+}
 
-  deleteRoleSuccess: class implements Action {
-    public readonly type = RoleActionTypes.DELETE_ROLE_SUCCESS;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class SelectRoleSuccess implements Action {
+  public readonly type = SELECT_ROLE_SUCCESS
+  constructor(public payload: any) { }
+}
 
-  deleteRoleFail: class implements Action {
-    public readonly type = RoleActionTypes.DELETE_ROLE_FAIL;
-    constructor(public payload: any, public meta?: any) { }
-  },
+export class SelectRoleFail implements Action {
+  public readonly type = SELECT_ROLE_FAIL
+  constructor(public payload: any) { }
+}
 
-  selectRole: class implements Action {
-    public readonly type = RoleActionTypes.SELECT_ROLE;
-    constructor(public payload: Account) { }
-  },
-
-};
+export type Actions =
+  | CreateRole
+  | CreateRoleSuccess
+  | CreateRoleFail
+  | ReadRoles
+  | ReadRolesSuccess
+  | ReadRolesFail
+  | UpdateRole
+  | UpdateRoleSuccess
+  | UpdateRoleFail
+  | DeleteRole
+  | DeleteRoleSuccess
+  | DeleteRoleFail
+  | SelectRole
+  | SelectRoleSuccess
+  | SelectRoleFail

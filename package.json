@@ -9,7 +9,7 @@
     "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
     "test": "cd apps/api-server/ && npm run test",
-    "update": "ncu -a && npm update && lerna exec \"ncu -a && npm update\""
+    "update": "ncu -a && lerna exec \"ncu -a\""
   },
   "keywords": [
     "angular",

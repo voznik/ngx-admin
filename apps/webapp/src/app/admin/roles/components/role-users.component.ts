@@ -46,15 +46,14 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
       this.service.users$.subscribe(
         (users) => {
           this.users = users.ids.map(id => users.entities[id])
-        },
-        (err) => console.log(err)))
+        }))
     this.subscriptions.push(
       this.service.selected$.subscribe(
         (role) => {
-          const roleIds = role.users.map(r => r.id)
+          const userIds = role.principals.map(p => p.principalId)
           this.item = role
-          this.items = role.users
-          this.options = this.users.filter(r => roleIds.indexOf(r.id) === -1)
+          this.items = this.users.filter(u => userIds.indexOf(u.id) !== -1)
+          this.options = this.users.filter(u => userIds.indexOf(u.id) === -1)
         },
         (err) => console.log(err)))
 
@@ -67,12 +66,12 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
 
   handleAction(event) {
     switch (event.type) {
-      case 'addRole':
+      case 'addUser':
         return this.service.addUserToRole({
           role: this.item,
           user: event.payload
         })
-      case 'removeRole':
+      case 'removeUser':
         return this.service.removeUserFromRole({
           role: this.item,
           user: event.payload

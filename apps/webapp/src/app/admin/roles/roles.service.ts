@@ -26,15 +26,15 @@ export class RolesService {
   ]
 
   constructor(
-    private api: AccountApi,
-    private roleApi: RoleApi,
+    private userApi: AccountApi,
+    private api: RoleApi,
     private ui: AdminUi,
     private store: Store<any>,
   ) {
-    this.admin$ = this.store.select('admin').distinctUntilChanged()
-    this.users$ = this.admin$.map(a => a.users).distinctUntilChanged()
-    this.roles$ = this.admin$.map(a => a.roles).distinctUntilChanged()
-    this.selected$ = this.users$.map(u => u.selected)
+    this.admin$ = this.store.select('admin')
+    this.users$ = this.admin$.map(a => a.users)
+    this.roles$ = this.admin$.map(a => a.roles)
+    this.selected$ = this.roles$.map(u => u.selected)
     this.subscriptions = []
   }
 
@@ -77,7 +77,7 @@ export class RolesService {
 
   setSelected(item) {
     this.store
-      .dispatch(new RoleActions.selectRole(item))
+      .dispatch(new RoleActions.SelectRole(item))
   }
 
   get(id): Observable<any> {
@@ -94,68 +94,26 @@ export class RolesService {
 
   create(item) {
     this.store
-      .dispatch(new RoleActions.createRole(item))
+      .dispatch(new RoleActions.CreateRole(item))
   }
 
   update(item) {
     this.store
-      .dispatch(new RoleActions.updateRole(item))
+      .dispatch(new RoleActions.UpdateRole(item))
   }
 
   delete(item) {
     this.store
-      .dispatch(new RoleActions.deleteRole(item))
+      .dispatch(new RoleActions.DeleteRole(item))
   }
 
   addUserToRole(item) {
     this.store
-      .dispatch(new UserActions.addUserToRole(item))
+      .dispatch(new UserActions.AddUserToRole(item))
   }
 
   removeUserFromRole(item) {
     this.store
-      .dispatch(new UserActions.deleteUserFromRole(item))
-  }
-
-  getRoleAccessTokens(item, successCb, errorCb): Subscription {
-    return this.api
-      .getAccessTokens(item.id)
-      .subscribe(successCb, errorCb)
-  }
-
-  generateToken(item, successCb, errorCb): Subscription {
-    return this.api
-      .createAccessTokens(item.id)
-      .subscribe(successCb, errorCb)
-  }
-
-  removeTtl(item, successCb, errorCb): Subscription {
-    return this.api
-      .updateByIdAccessTokens(item.user.id, item.token.id, { ttl: -1 })
-      .subscribe(successCb, errorCb)
-  }
-
-  deleteToken(item, successCb, errorCb): Subscription {
-    return this.api
-      .destroyByIdAccessTokens(item.user.id, item.token.id)
-      .subscribe(successCb, errorCb)
-  }
-
-  deleteAllTokens(item, successCb, errorCb): Subscription {
-    return this.api
-      .deleteAccessTokens(item.id)
-      .subscribe(successCb, errorCb)
-  }
-
-  changePassword(item, successCb, errorCb): Subscription {
-    return this.api
-      .resetPassword(item)
-      .subscribe(successCb, errorCb)
-  }
-
-  resetPassword(item, successCb, errorCb): Subscription {
-    return this.api
-      .resetPassword(item)
-      .subscribe(successCb, errorCb)
+      .dispatch(new UserActions.DeleteUserFromRole(item))
   }
 }

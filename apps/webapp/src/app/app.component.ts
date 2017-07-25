@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi } from '@ngx-plus/admin-sdk'
-import { AdminAuth } from '@ngx-plus/admin-auth'
+import { AuthService } from '@ngx-plus/admin-auth'
 import { AdminUi } from '@ngx-plus/admin-ui'
 import { Store } from '@ngrx/store'
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private userApi: AccountApi,
-    private auth: AdminAuth,
+    private auth: AuthService,
     private router: Router,
     private ui: AdminUi,
     private store: Store<any>,
@@ -28,9 +28,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.setHeaderImg('assets/img/ngx-plus-light.svg')
     this.ui.setHeaderImg('assets/img/ngx-plus-light.svg')
-    this.store.dispatch(new UserActions.readUsers({ include: 'roles' }))
-    this.store.dispatch(new RoleActions.readRoles({ include: 'principals' }))
-    this.store.dispatch(new ControlActions.readControls())
     this.ui.setSidebarNav([
       {
         items: [

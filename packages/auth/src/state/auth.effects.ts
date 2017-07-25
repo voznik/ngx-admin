@@ -3,145 +3,93 @@ import { Injectable } from '@angular/core'
 import { Effect, Actions } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
+import { of } from 'rxjs/observable/of'
 import { AdminUi } from '@ngx-plus/admin-ui'
 import { AccountApi } from '@ngx-plus/admin-sdk'
-import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/let'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/startWith'
 
-import * as auth from './auth.actions'
+import * as Auth from './auth.actions'
 
 @Injectable()
 export class AuthEffects {
-
-  @Effect({ dispatch: false })
-  login: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGIN)
-    .do(action => {
-      this.userApi.login(action.payload, 'user', true)
-        .subscribe(
-        (success) => {
-          this.store.dispatch({ type: 'AUTH_GET_USER_ROLES', payload: success })
-          this.store.dispatch(new auth.AuthLoginSuccessAction(success))
-        },
-        (error) => this.store.dispatch(new auth.AuthLoginErrorAction(error)),
-      )
-    })
-
-  @Effect({ dispatch: false })
-  loginError: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGIN_ERROR)
-    .do((action) => this.ui.toastError(get(action, 'payload.name'), get(action, 'payload.message')))
-
-  @Effect({ dispatch: false })
-  loginSuccess: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGIN_SUCCESS)
-    .do((action) => {
-      window.localStorage.setItem('token', JSON.stringify(action.payload))
-      this.ui.toastSuccess('Sign In Successful', `You are logged in as ${get(action, 'payload.user.email')}`)
-      return this.store.dispatch({ type: 'APP_REDIRECT_ROUTER' })
-    })
-
-  @Effect({ dispatch: false })
-  register: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_REGISTER)
-    .do((action: any) => {
-      this.userApi.create(action.payload)
-        .subscribe(
-        (success: any) => this.store.dispatch(new auth.AuthRegisterSuccessAction({
-          realm: action.payload.realm,
-          email: action.payload.email,
-          password: action.payload.password,
-        })),
-        (error) => this.store.dispatch(new auth.AuthRegisterErrorAction(error)),
-      )
-    })
-
-  @Effect({ dispatch: false })
-  registerSuccess: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_REGISTER_SUCCESS)
-    .do((action: any) => {
-      this.ui.toastSuccess('Successfully registered', `${action.payload.email} has been created`)
-      return this.store.dispatch(new auth.AuthLoginAction(action.payload))
-    })
-
-  @Effect({ dispatch: false })
-  registerError: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_REGISTER_ERROR)
-    .do((action) => this.ui.toastError(get(action, 'payload.name'), get(action, 'payload.message')))
-
-
-  @Effect({ dispatch: false })
-  logout: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGOUT)
-    .do(() => {
-      window.localStorage.removeItem('token')
-      this.userApi.logout()
-        .subscribe(
-        (success) => this.store.dispatch(new auth.AuthLogoutSuccessAction(success)),
-        (error) => this.store.dispatch(new auth.AuthLogoutErrorAction(error)),
-      )
-    })
-
-  @Effect({ dispatch: false })
-  logoutError: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGOUT_ERROR)
-    .do((action) => {
-      window.localStorage.removeItem('token')
-      this.ui.toastError(get(action, 'payload.name'), get(action, 'payload.message'))
-      return this.store.dispatch({ type: 'APP_REDIRECT_ROUTER' })
-    })
-
-  @Effect({ dispatch: false })
-  logoutSuccess: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_LOGOUT_SUCCESS)
-    .do(() => {
-      window.localStorage.removeItem('token')
-      this.ui.toastSuccess('Log Out Successful', 'You are logged out')
-      return this.store.dispatch({ type: 'APP_REDIRECT_ROUTER' })
-    })
-
-  @Effect({ dispatch: false })
-  getUserInfo$ = this.actions$
-    .ofType('AUTH_GET_USER_ROLES')
-    .do(action => {
-      this.userApi.info(action.payload.userId)
-        .subscribe(res => {
-          window.localStorage.setItem('roles', JSON.stringify(res.roles))
-          this.store.dispatch({ type: 'AUTH_SET_ROLES', payload: res.roles })
-        })
-    })
-
-  @Effect({ dispatch: false })
-  checkToken: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_CHECK_TOKEN)
-    .do(() => this.userApi.getCurrent()
-      .subscribe(
-      (success) => this.store.dispatch(new auth.AuthCheckTokenSuccessAction(success)),
-      (error) => this.store.dispatch(new auth.AuthCheckTokenErrorAction(error)),
-    )
-    )
-
-  @Effect({ dispatch: false })
-  checkTokenError: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_CHECK_TOKEN_ERROR)
-    .do((action) => {
-      this.ui.toastError('Invalid Token', 'Redirecting to login screen')
-      return this.store.dispatch({ type: 'APP_REDIRECT_LOGIN' })
-    })
-
-  @Effect({ dispatch: false })
-  checkTokenSuccess: Observable<Action> = this.actions$
-    .ofType(auth.ActionTypes.AUTH_CHECK_TOKEN_SUCCESS)
-    .do(() => {
-      this.ui.toastSuccess('Valid Token', 'It all looks good :)')
-      return true
-    })
 
   constructor(
     private actions$: Actions,
     private store: Store<any>,
     private userApi: AccountApi,
     private ui: AdminUi,
-  ) {
-  }
+  ) { }
+
+  @Effect()
+  protected login: Observable<Action> = this.actions$
+    .ofType(Auth.LOG_IN)
+    .mergeMap((action: Auth.LogIn) => this.userApi.login(action.payload, 'user', true)
+      .map((response: any) => new Auth.LogInSuccess(response))
+      .catch((error: any) => of(new Auth.LogInFail(error))))
+
+  @Effect({ dispatch: false })
+  protected loginSuccess = this.actions$
+    .ofType(Auth.LOG_IN_SUCCESS)
+    .map((action: Auth.LogInSuccess) => this.ui.toastSuccess('Log In Success', `You are logged in as ${action.payload.email}.`))
+
+  @Effect({ dispatch: false })
+  protected loginFail = this.actions$
+    .ofType(Auth.LOG_IN_FAIL)
+    .map((action: Auth.LogInFail) => this.ui.toastError('Log In Failure', `${action.payload.message}`))
+
+  @Effect()
+  register: Observable<Action> = this.actions$
+    .ofType(Auth.REGISTER)
+    .mergeMap((action: Auth.Register) => this.userApi.create(action.payload)
+      .map((response: any) => new Auth.RegisterSuccess(response))
+      .catch((error: any) => of(new Auth.RegisterFail(error))))
+
+  @Effect({ dispatch: false })
+  registerSuccess = this.actions$
+    .ofType(Auth.REGISTER_SUCCESS)
+    .map((action: Auth.RegisterSuccess) => this.ui.toastSuccess('Register Success', `<u><i>${action.payload.email}</i></u> has been registered successfully.`))
+
+
+  @Effect({ dispatch: false })
+  registerFail = this.actions$
+    .ofType(Auth.REGISTER_FAIL)
+    .map((action: Auth.RegisterFail) => this.ui.toastError(get(action, 'payload.name'), get(action, 'payload.message')))
+
+  @Effect()
+  logout: Observable<Action> = this.actions$
+    .ofType(Auth.LOG_OUT)
+    .mergeMap((action: Auth.LogOut) => this.userApi.logout()
+      .map((response: any) => new Auth.LogOutSuccess(response))
+      .catch((error: any) => of(new Auth.LogOutFail(error))))
+
+  @Effect({ dispatch: false })
+  logoutSuccess = this.actions$
+    .ofType(Auth.LOG_OUT_SUCCESS)
+    .map((action: Auth.LogOutSuccess) => this.ui.toastSuccess('Log Out Success', `You have logged out successfully.`))
+
+  @Effect({ dispatch: false })
+  logoutFail = this.actions$
+    .ofType(Auth.LOG_OUT_FAIL)
+    .map((action: Auth.LogOutFail) => this.ui.toastError('Log Out Failure', action.payload.message))
+
+  @Effect()
+  checkToken: Observable<Action> = this.actions$
+    .ofType(Auth.CHECK_TOKEN)
+    .mergeMap((action: Auth.LogOut) => this.userApi.getCurrent()
+      .map((response: any) => new Auth.CheckTokenSuccess(response))
+      .catch((error: any) => of(new Auth.CheckTokenFail(error))))
+
+  @Effect({ dispatch: false })
+  checkTokenFail = this.actions$
+    .ofType(Auth.CHECK_TOKEN_FAIL)
+    .map((action: Auth.CheckTokenFail) => this.ui.toastError('Invalid Token', 'Redirecting to Log In screen'))
+
+  @Effect({ dispatch: false })
+  checkTokenSuccess = this.actions$
+    .ofType(Auth.CHECK_TOKEN_SUCCESS)
+    .map((action: Auth.CheckTokenSuccess) => this.ui.toastSuccess('Valid Token', `Your access token has been validated.`))
 
 }

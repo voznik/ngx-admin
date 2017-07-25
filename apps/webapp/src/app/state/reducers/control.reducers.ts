@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable'
 import { Account, Role, RoleMapping, ACL } from '@ngx-plus/admin-sdk'
-import { ControlActions, ControlActionTypes, UserActions, UserActionTypes } from '../actions'
+import * as Controls from '../actions/control.actions'
 
 export interface State {
   ids: string[]
@@ -16,9 +16,9 @@ export const initialState: State = {
   count: 0,
 }
 
-export function ControlReducer(state: State = initialState, action: any): State {
+export function ControlReducer(state: State = initialState, action: Controls.Actions): State {
   switch (action.type) {
-    case ControlActionTypes.CREATE_CONTROL_SUCCESS: {
+    case Controls.CREATE_CONTROL_SUCCESS: {
       const control: ACL = action.payload
       const updateState = Object.assign({}, state)
       updateState.ids = [...state.ids, control.id]
@@ -26,23 +26,27 @@ export function ControlReducer(state: State = initialState, action: any): State 
       updateState.count = updateState.ids.length
       return updateState
     }
-    case ControlActionTypes.READ_CONTROLS_SUCCESS: {
+    case Controls.READ_CONTROLS_SUCCESS: {
+      const updateState = Object.assign({}, state)
       const controls: ACL[] = action.payload
       const newControls = controls.filter(control => !state.entities[control.id])
-      const newControlIds = newControls.map(control => control.id)
-      const newControlEntities = newControls.reduce((entities: { [id: string]: ACL }, control: ACL) => {
-        return Object.assign(entities, {
-          [control.id]: control
-        })
-      }, {})
-      const updateState = Object.assign({}, state)
-      updateState.ids = [...state.ids, ...newControlIds]
-      updateState.entities = Object.assign({}, state.entities, newControlEntities)
+      if (newControls) {
+        const newControlIds = newControls.map(control => control.id)
+        const newControlEntities = newControls.reduce((entities: { [id: string]: ACL }, control: ACL) => {
+          return Object.assign(entities, {
+            [control.id]: control
+          })
+        }, {})
+        updateState.ids = [...state.ids, ...newControlIds]
+        updateState.entities = Object.assign({}, state.entities, newControlEntities)
+      }
+      if (updateState.selected) {
+        updateState.selected = updateState.entities[updateState.selected.id]
+      }
       updateState.count = updateState.ids.length
-      updateState.selected = updateState.entities[updateState.selected.id]
       return updateState
     }
-    case ControlActionTypes.UPDATE_CONTROL_SUCCESS: {
+    case Controls.UPDATE_CONTROL_SUCCESS: {
       const control: ACL = action.payload
       const updateState = Object.assign({}, state)
       updateState.entities[control.id] = control
@@ -51,18 +55,18 @@ export function ControlReducer(state: State = initialState, action: any): State 
       }
       return updateState
     }
-    case ControlActionTypes.DELETE_CONTROL_SUCCESS: {
+    case Controls.DELETE_CONTROL_SUCCESS: {
       const control: ACL = action.payload
       const updateState = Object.assign({}, state)
-      delete updateState.ids[control.id]
-      delete updateState.entities[control.id.toString()]
+      updateState.ids = updateState.ids.filter(id => id !== control.id)
+      delete updateState.entities[control.id]
       updateState.count = updateState.ids.length
       if (control.id === state.selected.id) {
         updateState.selected = new ACL()
       }
       return updateState
     }
-    case ControlActionTypes.SELECT_CONTROL: {
+    case Controls.SELECT_CONTROL: {
       const control: ACL = action.payload
       const updateState = Object.assign({}, state)
       updateState.selected = control

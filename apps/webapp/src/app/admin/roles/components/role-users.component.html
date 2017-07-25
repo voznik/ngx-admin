@@ -32,8 +32,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of items">
-      <td><i class="fa fa-user"></i> &nbsp; {{ item.fullName }}</td>
-      <td>{{ item.email }}</td>
+      <td><i class="fa fa-user"></i> &nbsp; {{ item?.fullName }}</td>
+      <td>{{ item?.email }}</td>
       <td [style.text-align]="'right'">
         <button class="btn btn-danger btn-sm"
                 (click)="handleAction({ type: 'removeUser', payload: item })">

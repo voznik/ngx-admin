@@ -1,134 +1,158 @@
-import { Action } from '@ngrx/store';
-import { type } from '../util';
-import { Account, Role, ACL, LoopBackFilter } from '@ngx-plus/admin-sdk';
+import { Action } from '@ngrx/store'
+import { Account, Role, ACL, LoopBackFilter } from '@ngx-plus/admin-sdk'
 
-export const UserActionTypes = {
+export const CREATE_USER = '[Admin] CreateUser'
+export const CREATE_USER_SUCCESS = '[Admin] CreateUser Success'
+export const CREATE_USER_FAIL = '[Admin] CreateUser Fail'
 
-  CREATE_USER: type('[Admin] createUser'),
-  CREATE_USER_SUCCESS: type('[Admin] createUser success'),
-  CREATE_USER_FAIL: type('[Admin] createUser fail'),
+export const READ_USERS = '[Admin] ReadUsers'
+export const READ_USERS_SUCCESS = '[Admin] ReadUsers Success'
+export const READ_USERS_FAIL = '[Admin] ReadUsers Fail'
 
-  READ_USERS: type('[Admin] readUsers'),
-  READ_USERS_SUCCESS: type('[Admin] readUsers success'),
-  READ_USERS_FAIL: type('[Admin] readUsers fail'),
+export const UPDATE_USER = '[Admin] UpdateUser'
+export const UPDATE_USER_SUCCESS = '[Admin] UpdateUser Success'
+export const UPDATE_USER_FAIL = '[Admin] UpdateUser Fail'
 
-  UPDATE_USER: type('[Admin] updateUser'),
-  UPDATE_USER_SUCCESS: type('[Admin] updateUser success'),
-  UPDATE_USER_FAIL: type('[Admin] updateUser fail'),
+export const DELETE_USER = '[Admin] DeleteUser'
+export const DELETE_USER_SUCCESS = '[Admin] DeleteUser Success'
+export const DELETE_USER_FAIL = '[Admin] DeleteUser Fail'
 
-  DELETE_USER: type('[Admin] deleteUser'),
-  DELETE_USER_SUCCESS: type('[Admin] deleteUser success'),
-  DELETE_USER_FAIL: type('[Admin] deleteUser fail'),
+export const SELECT_USER = '[Admin] SelectUser'
+export const SELECT_USER_SUCCESS = '[Admin] SelectUser Success'
+export const SELECT_USER_FAIL = '[Admin] SelectUser Fail'
 
-  ADD_USER_TO_ROLE: type('[Admin] addUserToRole'),
-  ADD_USER_TO_ROLE_SUCCESS: type('[Admin] addUserToRole success'),
-  ADD_USER_TO_ROLE_FAIL: type('[Admin] addUserToRole fail'),
+export const ADD_USER_TO_ROLE = '[Admin] AddUserToRole'
+export const ADD_USER_TO_ROLE_SUCCESS = '[Admin] AddUserToRole Success'
+export const ADD_USER_TO_ROLE_FAIL = '[Admin] AddUserToRole Fail'
 
-  DELETE_USER_FROM_ROLE: type('[Admin] deleteUserFromRole'),
-  DELETE_USER_FROM_ROLE_SUCCESS: type('[Admin] deleteUserFromRole success'),
-  DELETE_USER_FROM_ROLE_FAIL: type('[Admin] deleteUserFromRole fail'),
+export const DELETE_USER_FROM_ROLE = '[Admin] DeleteUserFromRole'
+export const DELETE_USER_FROM_ROLE_SUCCESS = '[Admin] DeleteUserFromRole Success'
+export const DELETE_USER_FROM_ROLE_FAIL = '[Admin] DeleteUserFromRole Fail'
 
-  SELECT_USER: type('[Admin] selectUser'),
-  SELECT_USER_SUCCESS: type('[Admin] selectUser success'),
-  SELECT_USER_FAIL: type('[Admin] selectUser fail'),
-
+export class CreateUser implements Action {
+  public readonly type = CREATE_USER
+  constructor(public payload: Account) { }
 }
 
-export const UserActions = {
-
-  createUser: class implements Action {
-    public readonly type = UserActionTypes.CREATE_USER;
-    constructor(public payload: Account) { }
-  },
-
-  createUserSuccess: class implements Action {
-    public readonly type = UserActionTypes.CREATE_USER_SUCCESS;
-    constructor(public payload: Account) { }
-  },
-
-  createUserFail: class implements Action {
-    public readonly type = UserActionTypes.CREATE_USER_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  readUsers: class implements Action {
-    public readonly type = UserActionTypes.READ_USERS;
-    constructor(public payload: LoopBackFilter = {}) { }
-  },
-
-  readUsersSuccess: class implements Action {
-    public readonly type = UserActionTypes.READ_USERS_SUCCESS;
-    constructor(public payload: Account[]) { }
-  },
-
-  readUsersFail: class implements Action {
-    public readonly type = UserActionTypes.READ_USERS_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  updateUser: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_USER;
-    constructor(public payload: Account) { }
-  },
-
-  updateUserSuccess: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_USER_SUCCESS;
-    constructor(public payload: Account) { }
-  },
-
-  updateUserFail: class implements Action {
-    public readonly type = UserActionTypes.UPDATE_USER_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  deleteUser: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER;
-    constructor(public payload: any) { }
-  },
-
-  deleteUserSuccess: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER_SUCCESS;
-    constructor(public payload: any) { }
-  },
-
-  deleteUserFail: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  addUserToRole: class implements Action {
-    public readonly type = UserActionTypes.ADD_USER_TO_ROLE;
-    constructor(public payload: any) { }
-  },
-
-  addUserToRoleSuccess: class implements Action {
-    public readonly type = UserActionTypes.ADD_USER_TO_ROLE_SUCCESS;
-    constructor(public payload: any) { }
-  },
-
-  addUserToRoleFail: class implements Action {
-    public readonly type = UserActionTypes.ADD_USER_TO_ROLE_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  deleteUserFromRole: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER_FROM_ROLE;
-    constructor(public payload: any) { }
-  },
-
-  deleteUserFromRoleSuccess: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER_FROM_ROLE_SUCCESS;
-    constructor(public payload: any) { }
-  },
-
-  deleteUserFromRoleFail: class implements Action {
-    public readonly type = UserActionTypes.DELETE_USER_FROM_ROLE_FAIL;
-    constructor(public payload: any) { }
-  },
-
-  selectUser: class implements Action {
-    public readonly type = UserActionTypes.SELECT_USER;
-    constructor(public payload: Account) { }
-  },
-
+export class CreateUserSuccess implements Action {
+  public readonly type = CREATE_USER_SUCCESS
+  constructor(public payload: Account) { }
 }
+
+export class CreateUserFail implements Action {
+  public readonly type = CREATE_USER_FAIL
+  constructor(public payload: any) { }
+}
+
+export class ReadUsers implements Action {
+  public readonly type = READ_USERS
+  constructor(public payload: LoopBackFilter = {}) { }
+}
+
+export class ReadUsersSuccess implements Action {
+  public readonly type = READ_USERS_SUCCESS
+  constructor(public payload: Account[]) { }
+}
+
+export class ReadUsersFail implements Action {
+  public readonly type = READ_USERS_FAIL
+  constructor(public payload: any) { }
+}
+
+export class UpdateUser implements Action {
+  public readonly type = UPDATE_USER
+  constructor(public payload: Account) { }
+}
+
+export class UpdateUserSuccess implements Action {
+  public readonly type = UPDATE_USER_SUCCESS
+  constructor(public payload: Account) { }
+}
+
+export class UpdateUserFail implements Action {
+  public readonly type = UPDATE_USER_FAIL
+  constructor(public payload: any) { }
+}
+
+export class DeleteUser implements Action {
+  public readonly type = DELETE_USER
+  constructor(public payload: any) { }
+}
+
+export class DeleteUserSuccess implements Action {
+  public readonly type = DELETE_USER_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class DeleteUserFail implements Action {
+  public readonly type = DELETE_USER_FAIL
+  constructor(public payload: any) { }
+}
+
+export class SelectUser implements Action {
+  public readonly type = SELECT_USER
+  constructor(public payload: Account) { }
+}
+
+export class SelectUserSuccess implements Action {
+  public readonly type = SELECT_USER_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class SelectUserFail implements Action {
+  public readonly type = SELECT_USER_FAIL
+  constructor(public payload: any) { }
+}
+
+export class AddUserToRole implements Action {
+  public readonly type = ADD_USER_TO_ROLE
+  constructor(public payload: any) { }
+}
+
+export class AddUserToRoleSuccess implements Action {
+  public readonly type = ADD_USER_TO_ROLE_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class AddUserToRoleFail implements Action {
+  public readonly type = ADD_USER_TO_ROLE_FAIL
+  constructor(public payload: any) { }
+}
+
+export class DeleteUserFromRole implements Action {
+  public readonly type = DELETE_USER_FROM_ROLE
+  constructor(public payload: any) { }
+}
+
+export class DeleteUserFromRoleSuccess implements Action {
+  public readonly type = DELETE_USER_FROM_ROLE_SUCCESS
+  constructor(public payload: any) { }
+}
+
+export class DeleteUserFromRoleFail implements Action {
+  public readonly type = DELETE_USER_FROM_ROLE_FAIL
+  constructor(public payload: any) { }
+}
+
+export type Actions =
+  | CreateUser
+  | CreateUserSuccess
+  | CreateUserFail
+  | ReadUsers
+  | ReadUsersSuccess
+  | ReadUsersFail
+  | UpdateUser
+  | UpdateUserSuccess
+  | UpdateUserFail
+  | DeleteUser
+  | DeleteUserSuccess
+  | DeleteUserFail
+  | SelectUser
+  | SelectUserSuccess
+  | SelectUserFail
+  | AddUserToRole
+  | AddUserToRoleSuccess
+  | AddUserToRoleFail
+  | DeleteUserFromRole
+  | DeleteUserFromRoleSuccess
+  | DeleteUserFromRoleFail

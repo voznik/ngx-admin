@@ -6,7 +6,7 @@ import { AdminUi, NavItem } from '@ngx-plus/admin-ui'
 import { UserActions, RoleActions, ControlActions } from '../state'
 
 @Component({
-  selector: 'admin-admin',
+  selector: 'admin-main',
   template: `
     <router-outlet></router-outlet>
   `,
@@ -20,7 +20,11 @@ export class AdminComponent {
   constructor(
     private ui: AdminUi,
     private store: Store<any>,
-  ) { }
+  ) {
+    this.store.dispatch(new UserActions.ReadUsers({ include: 'roles' }))
+    this.store.dispatch(new RoleActions.ReadRoles({ include: 'principals' }))
+    this.store.dispatch(new ControlActions.ReadControls())
+  }
 
 
 }

@@ -1,106 +1,114 @@
-import { Action } from '@ngrx/store';
-import { type } from '../util';
-import { ACL, LoopBackFilter } from '@ngx-plus/admin-sdk';
+import { Action } from '@ngrx/store'
+import { ACL, LoopBackFilter } from '@ngx-plus/admin-sdk'
 
-export const ControlActionTypes = {
+export const CREATE_CONTROL = '[Admin] CreateControl'
+export const CREATE_CONTROL_SUCCESS = '[Admin] CreateControl Success'
+export const CREATE_CONTROL_FAIL = '[Admin] CreateControl Fail'
 
-  CREATE_CONTROL: type('[Admin] createControl'),
-  CREATE_CONTROL_SUCCESS: type('[Admin] createControl success'),
-  CREATE_CONTROL_FAIL: type('[Admin] createControl fail'),
+export const READ_CONTROLS = '[Admin] ReadControls'
+export const READ_CONTROLS_SUCCESS = '[Admin] ReadControls Success'
+export const READ_CONTROLS_FAIL = '[Admin] ReadControls Fail'
 
-  READ_CONTROLS: type('[Admin] readControls'),
-  READ_CONTROLS_SUCCESS: type('[Admin] readControls success'),
-  READ_CONTROLS_FAIL: type('[Admin] readControls fail'),
+export const UPDATE_CONTROL = '[Admin] UpdateControl'
+export const UPDATE_CONTROL_SUCCESS = '[Admin] UpdateControl Success'
+export const UPDATE_CONTROL_FAIL = '[Admin] UpdateControl Fail'
 
-  UPDATE_CONTROL: type('[Admin] updateControl'),
-  UPDATE_CONTROL_SUCCESS: type('[Admin] updateControl success'),
-  UPDATE_CONTROL_FAIL: type('[Admin] updateControl fail'),
+export const DELETE_CONTROL = '[Admin] DeleteControl'
+export const DELETE_CONTROL_SUCCESS = '[Admin] DeleteControl Success'
+export const DELETE_CONTROL_FAIL = '[Admin] DeleteControl Fail'
 
-  DELETE_CONTROL: type('[Admin] deleteControl'),
-  DELETE_CONTROL_SUCCESS: type('[Admin] deleteControl success'),
-  DELETE_CONTROL_FAIL: type('[Admin] deleteControl fail'),
+export const SELECT_CONTROL = '[Admin] SelectControl'
+export const SELECT_CONTROL_SUCCESS = '[Admin] SelectControl Success'
+export const SELECT_CONTROL_FAIL = '[Admin] SelectControl Fail'
 
-  SELECT_CONTROL: type('[Admin] selectControl'),
-  SELECT_CONTROL_SUCCESS: type('[Admin] selectControl success'),
-  SELECT_CONTROL_FAIL: type('[Admin] selectControl fail'),
+export class CreateControl implements Action {
+  public readonly type = CREATE_CONTROL
+  constructor(public payload: ACL) { }
+}
 
-};
+export class CreateControlSuccess implements Action {
+  public readonly type = CREATE_CONTROL_SUCCESS
+  constructor(public payload: ACL) { }
+}
 
-export const ControlActions = {
+export class CreateControlFail implements Action {
+  public readonly type = CREATE_CONTROL_FAIL
+  constructor(public payload: any) { }
+}
 
-  createControl: class implements Action {
-    public readonly type = ControlActionTypes.CREATE_CONTROL;
-    constructor(public payload: ACL) { }
-  },
+export class ReadControls implements Action {
+  public readonly type = READ_CONTROLS
+  constructor(public payload: LoopBackFilter = {}) { }
+}
 
-  createControlSuccess: class implements Action {
-    public readonly type = ControlActionTypes.CREATE_CONTROL_SUCCESS;
-    constructor(public payload: ACL) { }
-  },
+export class ReadControlsSuccess implements Action {
+  public readonly type = READ_CONTROLS_SUCCESS
+  constructor(public payload: ACL[]) { }
+}
 
-  createControlFail: class implements Action {
-    public readonly type = ControlActionTypes.CREATE_CONTROL_FAIL;
-    constructor(public payload: any) { }
-  },
+export class ReadControlsFail implements Action {
+  public readonly type = READ_CONTROLS_FAIL
+  constructor(public payload: any) { }
+}
 
-  readControls: class implements Action {
-    public readonly type = ControlActionTypes.READ_CONTROLS;
-    constructor(public payload: LoopBackFilter = {}) { }
-  },
+export class UpdateControl implements Action {
+  public readonly type = UPDATE_CONTROL
+  constructor(public payload: ACL) { }
+}
 
-  readControlsSuccess: class implements Action {
-    public readonly type = ControlActionTypes.READ_CONTROLS_SUCCESS;
-    constructor(public payload: ACL[]) { }
-  },
+export class UpdateControlSuccess implements Action {
+  public readonly type = UPDATE_CONTROL_SUCCESS
+  constructor(public payload: ACL) { }
+}
 
-  readControlsFail: class implements Action {
-    public readonly type = ControlActionTypes.READ_CONTROLS_FAIL;
-    constructor(public payload: any) { }
-  },
+export class UpdateControlFail implements Action {
+  public readonly type = UPDATE_CONTROL_FAIL
+  constructor(public payload: any) { }
+}
 
-  updateControl: class implements Action {
-    public readonly type = ControlActionTypes.UPDATE_CONTROL;
-    constructor(public payload: ACL) { }
-  },
+export class DeleteControl implements Action {
+  public readonly type = DELETE_CONTROL
+  constructor(public payload: any) { }
+}
 
-  updateControlSuccess: class implements Action {
-    public readonly type = ControlActionTypes.UPDATE_CONTROL_SUCCESS;
-    constructor(public payload: ACL) { }
-  },
+export class DeleteControlSuccess implements Action {
+  public readonly type = DELETE_CONTROL_SUCCESS
+  constructor(public payload: any) { }
+}
 
-  updateControlFail: class implements Action {
-    public readonly type = ControlActionTypes.UPDATE_CONTROL_FAIL;
-    constructor(public payload: any) { }
-  },
+export class DeleteControlFail implements Action {
+  public readonly type = DELETE_CONTROL_FAIL
+  constructor(public payload: any) { }
+}
 
-  deleteControl: class implements Action {
-    public readonly type = ControlActionTypes.DELETE_CONTROL;
-    constructor(public payload: any) { }
-  },
+export class SelectControl implements Action {
+  public readonly type = SELECT_CONTROL
+  constructor(public payload: ACL) { }
+}
 
-  deleteControlSuccess: class implements Action {
-    public readonly type = ControlActionTypes.DELETE_CONTROL_SUCCESS;
-    constructor(public payload: any) { }
-  },
+export class SelectControlSuccess implements Action {
+  public readonly type = SELECT_CONTROL_SUCCESS
+  constructor(public payload: any) { }
+}
 
-  deleteControlFail: class implements Action {
-    public readonly type = ControlActionTypes.DELETE_CONTROL_FAIL;
-    constructor(public payload: any) { }
-  },
+export class SelectControlFail implements Action {
+  public readonly type = SELECT_CONTROL_FAIL
+  constructor(public payload: any) { }
+}
 
-  selectControl: class implements Action {
-    public readonly type = ControlActionTypes.SELECT_CONTROL;
-    constructor(public payload: ACL) { }
-  },
-
-  selectControlSuccess: class implements Action {
-    public readonly type = ControlActionTypes.SELECT_CONTROL_SUCCESS;
-    constructor(public payload: any) { }
-  },
-
-  selectControlFail: class implements Action {
-    public readonly type = ControlActionTypes.SELECT_CONTROL_FAIL;
-    constructor(public payload: any) { }
-  },
-
-};
+export type Actions =
+  | CreateControl
+  | CreateControlSuccess
+  | CreateControlFail
+  | ReadControls
+  | ReadControlsSuccess
+  | ReadControlsFail
+  | UpdateControl
+  | UpdateControlSuccess
+  | UpdateControlFail
+  | DeleteControl
+  | DeleteControlSuccess
+  | DeleteControlFail
+  | SelectControl
+  | SelectControlSuccess
+  | SelectControlFail

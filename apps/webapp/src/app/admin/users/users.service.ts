@@ -31,9 +31,9 @@ export class UsersService {
     private ui: AdminUi,
     private store: Store<any>,
   ) {
-    this.admin$ = this.store.select('admin').distinctUntilChanged()
-    this.users$ = this.admin$.map(a => a.users).distinctUntilChanged()
-    this.roles$ = this.admin$.map(a => a.roles).distinctUntilChanged()
+    this.admin$ = this.store.select('admin')
+    this.users$ = this.admin$.map(a => a.users)
+    this.roles$ = this.admin$.map(a => a.roles)
     this.selected$ = this.users$.map(u => u.selected)
     this.subscriptions = []
   }
@@ -118,7 +118,7 @@ export class UsersService {
 
   setSelected(item) {
     this.store
-      .dispatch(new UserActions.selectUser(item))
+      .dispatch(new UserActions.SelectUser(item))
   }
 
   get(id): Observable<any> {
@@ -135,27 +135,27 @@ export class UsersService {
 
   create(item) {
     this.store
-      .dispatch(new UserActions.createUser(item))
+      .dispatch(new UserActions.CreateUser(item))
   }
 
   update(item) {
     this.store
-      .dispatch(new UserActions.updateUser(item))
+      .dispatch(new UserActions.UpdateUser(item))
   }
 
   delete(item) {
     this.store
-      .dispatch(new UserActions.deleteUser(item))
+      .dispatch(new UserActions.DeleteUser(item))
   }
 
   addUserToRole(item) {
     this.store
-      .dispatch(new UserActions.addUserToRole(item))
+      .dispatch(new UserActions.AddUserToRole(item))
   }
 
   removeUserFromRole(item) {
     this.store
-      .dispatch(new UserActions.deleteUserFromRole(item))
+      .dispatch(new UserActions.DeleteUserFromRole(item))
   }
 
   getUserAccessTokens(item, successCb, errorCb): Subscription {
