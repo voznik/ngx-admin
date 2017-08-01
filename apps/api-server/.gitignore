@@ -20,5 +20,4 @@ npm-debug.log
 db.json
 config/local*
 config/production*
-storage/*
 client/*

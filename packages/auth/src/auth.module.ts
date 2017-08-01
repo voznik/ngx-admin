@@ -25,6 +25,8 @@ const components = [
     FormsModule,
     RouterModule,
     AdminUiModule,
+    StoreModule.forFeature('auth', AuthReducer),
+    EffectsModule.forRoot([]),
     AuthRoutingModule
   ],
   declarations: [

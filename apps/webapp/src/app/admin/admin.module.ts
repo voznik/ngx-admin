@@ -7,13 +7,13 @@ import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin.routing'
 import { ControlModule } from './controls/control.module'
 
-import { AdminReducers, UserEffects, RoleEffects, ControlEffects } from '../state'
+import { AdminReducer, UserEffects, RoleEffects, ControlEffects } from '../state'
 
 @NgModule({
   imports: [
     SharedModule,
     ControlModule,
-    StoreModule.forFeature('admin', AdminReducers),
+    StoreModule.forFeature('admin', AdminReducer),
     AdminRoutingModule
   ],
   declarations: [

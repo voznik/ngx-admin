@@ -1,6 +1,6 @@
 import { Action, ActionReducer } from '@ngrx/store'
 import { SDKToken, Account } from '@ngx-plus/admin-sdk'
-import * as Auth from './auth.actions'
+import * as Auth from '../actions/auth.actions'
 
 export interface State {
   id: string

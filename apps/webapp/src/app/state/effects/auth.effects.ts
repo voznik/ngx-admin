@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/startWith'
 
-import * as Auth from './auth.actions'
+import * as Auth from '../actions/auth.actions'
 
 @Injectable()
 export class AuthEffects {

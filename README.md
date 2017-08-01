@@ -5,7 +5,7 @@
 <img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus-light.png" width="150px" />
 
 ```console
-@ngx-plus/admin
+@ngx-plus/ngx-admin
 ```
 
 </h2>

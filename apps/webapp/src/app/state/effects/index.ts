@@ -1,9 +1,4 @@
-import { UserEffects } from './user.effects';
-import { RoleEffects } from './role.effects';
-import { ControlEffects } from './control.effects';
-
-export {
-UserEffects,
-RoleEffects,
-ControlEffects,
-}
+export * from './user.effects'
+export * from './role.effects'
+export * from './control.effects'
+export * from './auth.effects'
