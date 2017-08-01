@@ -1,5 +1,5 @@
 {
-  "name": "@ngx-plus/api-server",
+  "name": "@ngx-plus/api",
   "version": "0.0.0",
   "main": "server/server.js",
   "scripts": {
@@ -44,7 +44,7 @@
     "typescript": "^2.4.2"
   },
   "license": "UNLICENSED",
-  "description": "api-server",
+  "description": "api",
   "devDependencies": {
     "@types/chalk": "^0.4.31"
   }
