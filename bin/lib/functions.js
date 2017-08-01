@@ -62,7 +62,7 @@ const rmDirRecursive = p => {
 }
 
 const getProjectPath = () => {
-  const projectName = '@ngx-plus/admin'
+  const projectName = '@ngx-plus/ngx-admin'
   const projectRoot = '../..'
   const projectPath = path.join(__dirname, projectRoot)
 
