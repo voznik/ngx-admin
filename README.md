@@ -1,5 +1,3 @@
-* * *
-
 <h2 align="center">
 
 <img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus-light.png" width="150px" />
@@ -9,6 +7,15 @@
 ```
 
 </h2>
+
+<p align="center">
+  <a href="https://ngx-plus-slack.now.sh/">
+    <img src="https://ngx-plus-slack.now.sh/badge.svg" />
+  </a>
+  <a href="https://travis-ci.org/ngx-plus/ngx-admin">
+    <img src="https://travis-ci.org/ngx-plus/ngx-admin.svg?branch=master" />
+  </a>
+</p>
 
 # Features
 

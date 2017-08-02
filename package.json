@@ -8,7 +8,7 @@
     "dev": "lerna run dev --stream",
     "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
-    "test": "cd apps/api/ && npm run test",
+    "test": "npm run build",
     "update": "ncu -a && lerna exec \"ncu -a\""
   },
   "keywords": [

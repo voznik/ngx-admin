@@ -6,5 +6,4 @@ dependencies:
     - npm install -g @angular/cli lerna loopback-cli
     - npm run clean
   post:
-    - npm run test
     - npm run build
