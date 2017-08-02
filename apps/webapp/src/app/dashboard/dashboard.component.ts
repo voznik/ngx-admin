@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { DashCard, AdminUi } from '@ngx-plus/admin-ui'
-import { Store } from '@ngrx/store'
+import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/admin-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
@@ -11,10 +11,12 @@ import { UserActions, RoleActions, ControlActions } from '../state'
   selector: 'admin-dashboard',
   template: `
   <admin-card icon="tachometer" cardTitle="Dashboard">
+    <h4 class="text-primary">Home</h4>
+    <hr />
     <h4 class="text-primary">Admin</h4>
     <hr />
-    <div *ngIf="dashCards" class="row align-items-center justify-content-center">
-      <div *ngFor="let item of dashCards" class="col-12 col-lg-4">
+    <div *ngIf="adminCards" class="row align-items-center justify-content-center">
+      <div *ngFor="let item of adminCards" class="col-12 col-lg-4">
         <a class="dash-card" [routerLink]="item.link" routerLinkActive="active">
           <div class="row align-items-center justify-content-center dash-card">
             <div [class]="'col-4 card-icon-left bg-' + item.class">
@@ -41,21 +43,24 @@ import { UserActions, RoleActions, ControlActions } from '../state'
   styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
-  public dashCards: DashCard[]
-  public admin$: Observable<any>
+  public adminCards: DashCard[]
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    private store: Store<any>,
     private ui: AdminUi,
+    private users: AccountApi,
+    private roles: RoleApi,
+    private controls: ACLApi,
   ) {
-    this.admin$ = this.store.select('admin')
+    this.ui.activateHeader()
+    this.ui.activateSidebar()
+    this.ui.activateFooter()
+  }
+
+  ngOnInit() {
     this.setDashCards()
-    this.store.dispatch(new UserActions.ReadUsers({ include: 'roles' }))
-    this.store.dispatch(new RoleActions.ReadRoles({ include: 'principals' }))
-    this.store.dispatch(new ControlActions.ReadControls())
   }
 
   ngOnDestroy() {
@@ -63,25 +68,25 @@ export class DashboardComponent implements OnDestroy {
   }
 
   setDashCards() {
-    this.dashCards = [
+    this.adminCards = [
       {
         name: 'Users',
         icon: 'users',
-        data: this.admin$.map(a => a.users.count),
+        data: this.users.count().map(c => c.count),
         link: '/admin/users',
-        class: 'success',
+        class: 'primary',
       },
       {
         name: 'Roles',
         icon: 'tags',
-        data: this.admin$.map(a => a.roles.count),
+        data: this.roles.count().map(c => c.count),
         link: '/admin/roles',
         class: 'warning',
       },
       {
         name: 'Controls',
         icon: 'ban',
-        data: this.admin$.map(a => a.controls.count),
+        data: this.controls.count().map(c => c.count),
         link: '/admin/controls',
         class: 'danger',
       }

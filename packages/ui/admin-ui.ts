@@ -24,6 +24,7 @@ export class AdminUi {
   public sidebarOpen: boolean
   public sidebarNav: NavItem[]
 
+  public footerActive: boolean
 
   constructor(
     public toastyService: ToastyService,
@@ -37,6 +38,7 @@ export class AdminUi {
     this.toastyConfig.theme = 'bootstrap'
     this.sidebarActive = true
     this.headerActive = true
+    this.footerActive = true
     this.checkLargeScreen()
     if (this.isLargeScreen) {
       this.sidebarOpen = true
@@ -91,6 +93,14 @@ export class AdminUi {
 
   setSidebarNav(nav: NavItem[]): void {
     this.sidebarNav = nav
+  }
+
+  activateFooter(): void {
+    this.footerActive = true
+  }
+
+  deactivateFooter(): void {
+    this.footerActive = false
   }
 
   toast(config: any): void {

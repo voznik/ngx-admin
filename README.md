@@ -41,7 +41,7 @@
 ### Clone the Repo
 
 ```sh
-> git clone https://github.com/ngx-plus/admin.git
+> git clone https://github.com/ngx-plus/ngx-admin.git
 ```
 
 # Install

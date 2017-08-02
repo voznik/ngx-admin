@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core'
-import { AuthService } from '@ngx-plus/admin-auth'
 import { SDKBrowserModule, LoopBackConfig } from '@ngx-plus/admin-sdk'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+
+import { AuthService } from './auth'
 
 @NgModule({
   imports: [

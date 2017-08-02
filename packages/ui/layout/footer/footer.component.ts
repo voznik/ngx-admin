@@ -6,7 +6,7 @@ import { AdminUi } from '../../admin-ui';
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {
-  constructor(public adminUi: AdminUi) {
+  constructor(public ui: AdminUi) {
 
   }
 }

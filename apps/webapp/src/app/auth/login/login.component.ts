@@ -2,9 +2,6 @@ import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { AdminUi } from '@ngx-plus/admin-ui'
 import { AccountApi } from '@ngx-plus/admin-sdk'
-import { Store } from '@ngrx/store'
-
-import * as Auth from '../state/auth.actions'
 
 @Component({
   selector: 'admin-auth-login',
@@ -29,7 +26,6 @@ export class LoginComponent {
     private ui: AdminUi,
     private api: AccountApi,
     private router: Router,
-    private store: Store<any>,
   ) {
     this.formConfig = this.getFormConfig()
     this.ui.deactivateSidebar()
@@ -64,16 +60,16 @@ export class LoginComponent {
   }
 
   login(event) {
-    this.store.dispatch(new Auth.LogIn(event.payload))
-    // .login(event.payload)
-    // .subscribe(
-    // (data) => {
-    //   this.router.navigate(['dashboard'])
-    //   this.ui.toastSuccess('Login Success', `You are logged in as <u><i>${event.payload.email}</u></i>.`)
-    // },
-    // (err) => {
-    //   this.ui.toastError('Login Failure', err.statusCode === 401 ? 'Invalid Credentials' : err.message)
-    // })
+    this.api
+      .login(event.payload)
+      .subscribe(
+      (data) => {
+        this.router.navigate(['dashboard'])
+        this.ui.toastSuccess('Login Success', `You are logged in as <u><i>${event.payload.email}</u></i>.`)
+      },
+      (err) => {
+        this.ui.toastError('Login Failure', err.statusCode === 401 ? 'Invalid Credentials' : err.message)
+      })
   }
 
   logout() {

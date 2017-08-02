@@ -7,13 +7,14 @@ import { Subscription } from 'rxjs/Subscription'
 import { AuthService } from './auth.service'
 
 @Component({
+  selector: 'admin-auth',
   template: `
     <div class="row align-items-center justify-content-center">
       <div class="col-12 col-lg-6">
         <admin-card [nav]="nav"
-                    [headerImg]="auth.headerImg"
-                    [preHeaderImg]="auth.preHeaderImg"
-                    [postHeaderImg]="auth.postHeaderImg">
+                    [headerImg]="data.headerImg"
+                    [preHeaderImg]="data.preHeaderImg"
+                    [postHeaderImg]="data.postHeaderImg">
           <router-outlet></router-outlet>
         </admin-card>
       </div>
@@ -35,6 +36,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   private userRef: FireLoopRef<Account>
   private token: any
   public nav: NavItem
+  public data: any
 
   constructor(
     private ui: AdminUi,
@@ -43,7 +45,13 @@ export class AuthComponent implements OnInit, OnDestroy {
     public userApi: AccountApi,
     public router: Router,
   ) {
+
+  }
+
+  ngOnInit() {
     this.ui.deactivateSidebar()
+    this.ui.deactivateHeader()
+    this.ui.deactivateFooter()
     this.nav = {
       title: '',
       items: [
@@ -51,10 +59,11 @@ export class AuthComponent implements OnInit, OnDestroy {
         { name: 'Register', link: '/auth/register', icon: 'registered' }
       ]
     }
-  }
-
-  ngOnInit() {
-
+    this.data = {
+      headerImg: this.auth.headerImg,
+      preHeaderImg: this.auth.preHeaderImg,
+      postHeaderImg: this.auth.postHeaderImg,
+    }
   }
 
   ngOnDestroy() {

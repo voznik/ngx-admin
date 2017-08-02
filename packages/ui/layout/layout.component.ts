@@ -6,7 +6,7 @@ import { AdminUi } from '../admin-ui';
   template: `
     <admin-header></admin-header>
     <admin-sidebar></admin-sidebar>
-    <breadcrumb [class.open]="ui.sidebarActive && ui.sidebarOpen"></breadcrumb>
+    <breadcrumb *ngIf="ui.headerActive" [class.open]="ui.sidebarActive && ui.sidebarOpen"></breadcrumb>
     <admin-body></admin-body>
     <admin-footer></admin-footer>
   `,

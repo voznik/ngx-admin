@@ -6,10 +6,10 @@ const routes: Routes = [
     path: '',
     children: [
       { path: '', redirectTo: 'auth', pathMatch: 'full' },
-      { path: 'auth', loadChildren: '@ngx-plus/admin-auth/src/auth.module#AuthModule' },
-      { path: 'dashboard', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
-      { path: 'home', loadChildren: 'app/home/home.module#HomeModule' },
-      { path: 'admin', loadChildren: 'app/admin/admin.module#AdminModule' },
+      { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+      { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+      { path: 'home', loadChildren: './home/home.module#HomeModule' },
+      { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
     ]
   }
 ];

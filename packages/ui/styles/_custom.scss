@@ -153,6 +153,7 @@
 
 body {
   font-size: 15px;
+  height   : 100%;
 }
 
 .app-body,
@@ -312,6 +313,10 @@ breadcrumb.open .breadcrumb {
   height        : calc(100vh - 90px);
   margin-left   : 250px;
   padding-bottom: 30px;
+
+  &.no-header {
+    height: 100vh;
+  }
 }
 
 .footer {

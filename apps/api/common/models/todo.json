@@ -1,6 +1,6 @@
 {
   "name": "Todo",
-  "plural": "todos",
+  "plural": "Todos",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -12,7 +12,7 @@
     "TimeStamp": {
       "required": false
     },
-    "Stats": [{
+    "Stats": [ {
       "method": "stats",
       "endpoint": "/stats",
       "description": "Statistical information for Todo registers.",
@@ -21,7 +21,7 @@
         "on": "dueAt",
         "by": "index"
       }
-    }]
+    } ]
   },
   "properties": {
     "text": {

@@ -7,20 +7,22 @@
          [class.table-responsive]="!ui.isLargeScreen">
     <thead>
       <tr>
-        <th *ngFor="let header of service.tableColumns">{{ header.label }}</th>
+        <th *ngFor="let header of service.tableColumns"
+            [class]="header.class || ''">{{ header.label }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
         <td>{{ item.name }}</td>
         <td>{{ item.description }}</td>
-        <td nowrap>
+        <td class="text-right"
+            nowrap>
           <button type="button"
                   class="btn btn-secondary btn-sm"
                   (click)="handleAction({ type: 'viewUsers', payload: item})">
-            <span class="badge badge-info">{{ item?.principals?.length || 0 | number }}</span>
+              <i class="fa fa-fw fa-search"></i>
               Users
-            <i class="fa fa-fw fa-search"></i>
+              <span class="badge badge-success">{{ item?.principals?.length || 0 | number }}</span>
           </button>
           <button type="button"
                   class="btn btn-primary btn-sm"

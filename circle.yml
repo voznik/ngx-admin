@@ -3,7 +3,8 @@ machine:
     version: 8.1.0
 dependencies:
   pre:
-    - npm install -g @angular/cli lerna loopback-cli @mean-expert/fireloop
+    - npm install -g @angular/cli lerna loopback-cli
+    - npm run clean
   post:
     - npm run test
     - npm run build

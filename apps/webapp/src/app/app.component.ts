@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
 import { AccountApi } from '@ngx-plus/admin-sdk'
-import { AuthService } from '@ngx-plus/admin-auth'
 import { AdminUi } from '@ngx-plus/admin-ui'
-import { Store } from '@ngrx/store'
 
+import { AuthService } from './auth'
 import { UserActions, RoleActions, ControlActions } from './state'
 
 @Component({
@@ -18,11 +16,8 @@ import { UserActions, RoleActions, ControlActions } from './state'
 export class AppComponent implements OnInit {
 
   constructor(
-    private userApi: AccountApi,
     private auth: AuthService,
-    private router: Router,
     private ui: AdminUi,
-    private store: Store<any>,
   ) { }
 
   ngOnInit() {
@@ -70,11 +65,6 @@ export class AppComponent implements OnInit {
         ]
       }
     ])
-    this.ui.activateSidebar()
-  }
-
-  isAuthenticated() {
-    return this.userApi.isAuthenticated()
   }
 
 }
