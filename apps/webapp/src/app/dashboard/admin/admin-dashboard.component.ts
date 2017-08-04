@@ -5,22 +5,16 @@ import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
-import { UserActions, RoleActions, ControlActions } from '../state'
-
 @Component({
-  selector: 'dashboard',
+  selector: 'admin-dashboard',
   template: `
-  <admin-card icon="tachometer" cardTitle="Dashboard" [nav]="nav">
-    <router-outlet></router-outlet>
-  </admin-card>
+    <admin-dash-cards [dashCards]="dashCards"></admin-dash-cards>
   `,
-  styleUrls: ['./dashboard.component.scss']
 })
 
-export class DashboardComponent implements OnInit, OnDestroy {
+export class AdminDashboardComponent implements OnInit, OnDestroy {
 
-  public adminCards: DashCard[]
-  public nav: NavItem
+  public dashCards: DashCard[]
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
@@ -33,13 +27,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.nav = {
-      title: '',
-      items: [
-        { name: 'Home', link: '/dashboard/home', icon: 'fa fa-fw fa-home' },
-        { name: 'Admin', link: '/dashboard/admin', icon: 'fa fa-fw fa-lock' }
-      ]
-    }
     this.setDashCards()
   }
 
@@ -48,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setDashCards() {
-    this.adminCards = [
+    this.dashCards = [
       {
         name: 'Users',
         icon: 'users',
