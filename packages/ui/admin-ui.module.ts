@@ -9,7 +9,7 @@ import { ToastyModule } from 'ng2-toasty'
 import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
 
 import { LayoutComponent, BodyComponent, FooterComponent, HeaderComponent, SidebarComponent } from './layout'
-import { AdminForm, FormComponent, CardComponent, ModalComponent } from './components'
+import { AdminForm, FormComponent, CardComponent, ModalComponent, DashCardComponent } from './components'
 import { AdminUi } from './admin-ui'
 
 const components = [
@@ -21,6 +21,7 @@ const components = [
   CardComponent,
   FormComponent,
   ModalComponent,
+  DashCardComponent,
 ]
 
 @NgModule({

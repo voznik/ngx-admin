@@ -11,7 +11,7 @@
           class="nav-item">
         <a class="nav-link"
            routerLinkActive="active"
-           [routerLink]="item.link"><i [class]="'fa fa-' + item.icon"></i> {{ item.name }}
+           [routerLink]="item.link"><i [class]="item.icon"></i> {{ item.name }}
            <span *ngIf="item.isNew" class="badge badge-success">NEW</span>
         </a>
       </li>

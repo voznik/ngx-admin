@@ -23,7 +23,7 @@
       </div>
       <div class="col-12 col-md-6 align-self-start">
         <h4 class="card-title text-right mb-0">
-            <i *ngIf="icon" [class]="'fa fa-fw fa-' + icon"></i>
+            <i *ngIf="icon" [class]="icon"></i>
           </h4>
         <button *ngIf="createButton"
                 [class]="createButton.class || 'mt-3'"
@@ -40,7 +40,7 @@
             <a [routerLink]="item.link"
                routerLinkActive="active"
                class="nav-link">
-                <i *ngIf="item.icon" [class]="'fa fa-fw fa-' + item.icon"></i>
+                <i *ngIf="item.icon" [class]="item.icon"></i>
                 {{ item.name }}
               </a>
           </li>
