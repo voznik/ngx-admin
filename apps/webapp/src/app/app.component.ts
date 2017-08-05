@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
           {
             'name': 'Dashboard',
             'link': '/dashboard',
-            'icon': 'tachometer',
+            'icon': 'fa fa-fw fa-tachometer',
             'isNew': true
           },
         ]
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
           {
             'name': 'Todos',
             'link': '/home/todos',
-            'icon': 'check-square-o'
+            'icon': 'fa fa-fw fa-check-square-o'
           },
         ]
       },
@@ -50,17 +50,17 @@ export class AppComponent implements OnInit {
           {
             'name': 'Users',
             'link': '/admin/users',
-            'icon': 'users'
+            'icon': 'fa fa-fw fa-users'
           },
           {
             'name': 'Roles',
             'link': '/admin/roles',
-            'icon': 'tags'
+            'icon': 'fa fa-fw fa-tags'
           },
           {
             'name': 'Controls',
             'link': '/admin/controls',
-            'icon': 'ban'
+            'icon': 'fa fa-fw fa-ban'
           },
         ]
       }

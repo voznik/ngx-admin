@@ -55,8 +55,8 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.nav = {
       title: '',
       items: [
-        { name: 'Log In', link: '/auth/login', icon: 'sign-in' },
-        { name: 'Register', link: '/auth/register', icon: 'registered' }
+        { name: 'Log In', link: '/auth/login', icon: 'fa fa-fw fa-sign-in' },
+        { name: 'Register', link: '/auth/register', icon: 'fa fa-fw fa-registered' }
       ]
     }
     this.data = {

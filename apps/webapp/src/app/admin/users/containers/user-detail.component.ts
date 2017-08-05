@@ -10,7 +10,7 @@ import { UsersService } from '../users.service'
     <admin-card *ngIf="item"
                 [cardTitle]="item?.fullName"
                 [subTitle]="item?.email"
-                icon="user-circle"
+                icon="fa fa-fw fa-user-circle"
                 [nav]="tabs">
       <router-outlet></router-outlet>
     </admin-card>
@@ -21,10 +21,10 @@ export class UserDetailComponent implements OnInit {
   public tabs: NavItem = {
     title: '',
     items: [
-      { icon: 'user', name: 'Profile', link: 'profile' },
-      { icon: 'key', name: 'Password', link: 'password' },
-      { icon: 'unlock', name: 'Access Tokens', link: 'access-tokens' },
-      { icon: 'tags', name: 'Roles', link: 'roles' },
+      { icon: 'fa fa-fw fa-user', name: 'Profile', link: 'profile' },
+      { icon: 'fa fa-fw fa-key', name: 'Password', link: 'password' },
+      { icon: 'fa fa-fw fa-unlock', name: 'Access Tokens', link: 'access-tokens' },
+      { icon: 'fa fa-fw fa-tags', name: 'Roles', link: 'roles' },
     ]
   }
 

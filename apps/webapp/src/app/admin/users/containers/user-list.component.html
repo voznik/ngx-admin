@@ -1,5 +1,5 @@
 <admin-card cardTitle="Users"
-            icon="users"
+            icon="fa fa-fw fa-users"
             [createButton]="service.getCardButtons()"
             (action)="create()">
   <table *ngIf="items"
@@ -15,8 +15,7 @@
       <tr *ngFor="let item of items">
         <td>{{ item.fullName }}</td>
         <td>{{ item.email }}</td>
-        <td class="text-right"
-            nowrap>
+        <td nowrap>
           <button type="button"
                   class="btn btn-secondary btn-sm"
                   (click)="handleAction({ type: 'viewRoles', payload: item})">

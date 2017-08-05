@@ -20,9 +20,9 @@ export class RolesService {
   public roles$: Observable<any>
   public selected$: Observable<any>
   public tableColumns = [
+    { field: 'actions', label: 'Actions' },
     { field: 'name', label: 'Name', action: 'edit' },
     { field: 'description', label: 'Description' },
-    { field: 'actions', label: 'Actions', class: 'text-right' },
   ]
 
   constructor(
@@ -67,7 +67,7 @@ export class RolesService {
       this.ui.form.input('description', {
         label: 'Description',
         addonLeft: {
-          class: 'fa fa-fw fa-comment'
+          class: 'fa fa-fw fa-info-circle'
         },
         className: 'col-12',
       }),

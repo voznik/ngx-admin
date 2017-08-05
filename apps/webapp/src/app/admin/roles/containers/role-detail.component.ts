@@ -10,7 +10,7 @@ import { RolesService } from '../roles.service'
     <admin-card *ngIf="item"
                 [cardTitle]="item?.name"
                 [subTitle]="item?.description"
-                icon="tag"
+                icon="fa fa-fw fa-tag"
                 [nav]="tabs">
       <router-outlet></router-outlet>
     </admin-card>
@@ -21,8 +21,8 @@ export class RoleDetailComponent implements OnInit {
   public tabs: NavItem = {
     title: '',
     items: [
-      { icon: 'pencil', name: 'Edit', link: 'edit' },
-      { icon: 'users', name: 'Users', link: 'users' },
+      { icon: 'fa fa-fw fa-pencil-square-o', name: 'Edit', link: 'edit' },
+      { icon: 'fa fa-fw fa-users', name: 'Users', link: 'users' },
     ]
   }
 

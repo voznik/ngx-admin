@@ -10,7 +10,7 @@ import { UserActions, RoleActions, ControlActions } from '../state'
 @Component({
   selector: 'dashboard',
   template: `
-  <admin-card icon="tachometer" cardTitle="Dashboard" [nav]="nav">
+  <admin-card icon="fa fa-fw fa-tachometer" cardTitle="Dashboard" [nav]="nav">
     <router-outlet></router-outlet>
   </admin-card>
   `,
