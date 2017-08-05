@@ -1,0 +1,80 @@
+@import '../../styles/variables';
+
+.sidebar {
+  background: $brand-info;
+  display   : block;
+  height    : 100vh;
+  margin    : 0 0 0 -250px;
+  position  : fixed;
+  top       : 50px;
+  width     : 250px;
+
+  &.open {
+    box-shadow : inset -1px 0 3px rgba(0, 0, 0, 0.3);
+    margin-left: 0;
+  }
+
+  .nav {
+    display: block;
+  }
+
+  .nav-title {
+    padding       : 10px 10px 0;
+    margin-bottom : 0;
+    font-size     : 15px;
+    color         : #eee;
+    text-transform: uppercase;
+    width         : 250px;
+
+    &:after {
+      content   : "";
+      display   : block;
+      height    : 1px;
+      width     : 20px;
+      margin    : 10px 0 5px;
+      background: #eee;
+      clear     : both;
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    margin  : 0;
+
+    .nav-link {
+      display: block;
+    }
+  }
+
+  a {
+    color    : #f9f9f9;
+    font-size: 16px;
+    padding  : 8px 20px;
+    width    : 250px;
+    @include ripple($brand-primary);
+
+    &:hover {
+      background: darken($brand-success, 15%);
+    }
+
+    &.active {
+      background : lighten($brand-success, 33%);
+      color      : darken($brand-success, 15%);
+      font-weight: 500;
+
+      i {
+        color: darken($brand-success, 15%);
+      }
+    }
+  }
+
+  i {
+    color       : #f3f3f3;
+    margin-right: 20px;
+  }
+
+  .badge {
+    float     : right;
+    margin-top: 3px;
+  }
+}

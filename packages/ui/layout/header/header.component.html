@@ -1,36 +1,41 @@
 <nav *ngIf="ui.headerActive"
      class="navbar navbar-light fixed-top bg-faded">
-  <div class="navbar-brand">
-    ngx
-    <img *ngIf="ui.headerImg"
-         [src]="ui.headerImg"
-         height="42px" /> plus
-  </div>
-  <button *ngIf="ui.sidebarActive"
-          class="btn btn-sm btn-success sidebar-toggle"
-          (click)="ui.toggleSidebar()">
-    <i [class]="'fa fa-lg fa-chevron-' + (ui.sidebarOpen ? 'left pr-1' : 'right pl-1')"></i>
-  </button>
-  <div *ngIf="userApi.isAuthenticated()">
-    <div *ngIf="user"
-         ngbDropdown
-         class="nav-user-drop ml-auto">
-      <a id="drop1"
-         ngbDropdownToggle>
-        <div class="img-wrap">
-          <img src="assets/img/ngx-plus.svg"
-               height="44px"
-               width="44px"
-               class="img-avatar" />
+  <div class="row align-items-center align-content-center">
+    <div class="col-6">
+      <button *ngIf="ui.sidebarActive"
+              class="btn sidebar-toggle"
+              (click)="ui.toggleSidebar()">
+           <i [class]="'fa fa-fw fa-' + (ui.sidebarOpen ? 'chevron-circle-left' : 'bars')"></i>
+      </button>
+      <div class="navbar-brand">
+        ngx
+        <img *ngIf="ui.headerImg"
+             [src]="ui.headerImg"
+             height="44px" /> plus
+      </div>
+    </div>
+    <div class="col-6">
+      <div *ngIf="userApi.isAuthenticated()"
+           ngbDropdown
+           class="nav-user-drop">
+        <a *ngIf="user"
+           id="navUserDrop"
+           ngbDropdownToggle>
+          <div class="img-wrap">
+            <img src="assets/img/id.jpg"
+                 height="44px"
+                 width="44px"
+                 class="img-avatar" />
+          </div>
+          &nbsp; {{ user.fullName }}
+        </a>
+        <div class="dropdown-menu"
+             aria-labelledby="navUserDrop">
+          <button class="dropdown-item"
+                  (click)="logout()">
+            <i class="fa fa-fw fa-sign-out"></i> Log Out
+          </button>
         </div>
-        &nbsp; {{ user.fullName }}
-      </a>
-      <div class="dropdown-menu"
-           aria-labelledby="drop1">
-        <button class="dropdown-item"
-                (click)="logout()">
-             <i class="fa fa-fw fa-sign-out"></i> Log Out
-        </button>
       </div>
     </div>
   </div>

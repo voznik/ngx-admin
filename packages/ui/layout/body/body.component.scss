@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.app-body {
+  background    : lighten($brand-success, 33%);
+  border-top    : 1px solid #ccc;
+  height        : calc(100vh - 90px);
+  margin-left   : 250px;
+  padding-bottom: 40px;
+
+  &.no-header {
+    height: 100vh;
+  }
+}
