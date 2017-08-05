@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {
-    "@angular/common": "^4.3.2",
-    "@angular/core": "^4.3.2",
-    "@angular/forms": "^4.3.2",
-    "@angular/router": "^4.3.2"
+    "@angular/common": "^4.3.3",
+    "@angular/core": "^4.3.3",
+    "@angular/forms": "^4.3.3",
+    "@angular/router": "^4.3.3"
   },
   "publishConfig": {
     "access": "public"
