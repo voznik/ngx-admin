@@ -1,21 +1,5 @@
 @import '../../variables';
 
-.dash-card {
-  height         : 100px;
-  text-decoration: none;
-
-  .card-block {
-    padding: 15px;
-  }
-}
-
-.card-icon-left {
-  background  : $brand-success;
-  color       : #fff;
-  margin-right: -15px;
-  padding     : 0;
-}
-
 hr {
   border-top : 1px solid #ccc;
   margin-left: 0;

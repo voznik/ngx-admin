@@ -1,11 +1,13 @@
 import { get } from 'lodash'
 import { Injectable } from '@angular/core'
+import { Router } from '@angular/router'
 import { Effect, Actions } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
 import { AdminUi } from '@ngx-plus/admin-ui'
 import { AccountApi, LoopBackAuth } from '@ngx-plus/admin-sdk'
+import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/let'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
@@ -21,7 +23,8 @@ export class AuthEffects {
     private store: Store<any>,
     private userApi: AccountApi,
     private ui: AdminUi,
-    private auth: LoopBackAuth
+    private auth: LoopBackAuth,
+    private router: Router,
   ) { }
 
   @Effect()
@@ -40,7 +43,8 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected loginSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
-    .map((action: Auth.LogInSuccess) => this.ui.toastSuccess('Log In Success', `You are logged in as ${action.payload.email}.`))
+    .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
+    .map((action: Auth.LogInSuccess) => this.ui.toastSuccess('Log In Success', `You are logged in as <u><i>${action.payload.user.email}</u></i>.`))
 
   @Effect({ dispatch: false })
   protected loginFail = this.actions$

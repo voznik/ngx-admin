@@ -22,7 +22,7 @@ export class UsersService {
   public tableColumns = [
     { field: 'firstName', label: 'Name', action: 'edit' },
     { field: 'email', label: 'Email' },
-    { field: 'actions', label: 'Actions', class: 'text-right' },
+    { field: 'actions', label: 'Actions' },
   ]
 
   constructor(

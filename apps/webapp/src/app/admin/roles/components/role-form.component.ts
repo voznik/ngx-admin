@@ -35,6 +35,8 @@ export class RoleFormComponent implements OnInit {
 
   ngOnInit() {
     this.formConfig = this.service.getFormConfig(true)
+    this.formConfig.buttonColClass = 'col-12 col-lg-6'
+    this.formConfig.fields.forEach(field => field.className = 'col-12 col-lg-6')
     this.subscriptions.push(
       this.service.selected$.subscribe(
         (role) => this.item = role,

@@ -49,25 +49,25 @@
   float    : right;
   font-size: 15px;
   height   : 50px;
-  padding  : 4px 15px;
+  padding  : 3px 15px;
   @include ripple($brand-info);
 }
 
 .img-wrap {
   border-radius: 25px;
   display      : inline-block;
-  width        : 42px;
-  height       : 42px;
+  width        : 44px;
+  height       : 44px;
   border       : 1px solid $brand-info;
   margin       : auto;
 
   .img-avatar {
     border       : 0;
     border-radius: 25px;
-    height       : 40px;
+    height       : 42px;
     opacity      : 0.9;
     padding      : 1px;
-    width        : 40px;
+    width        : 42px;
   }
 }
 

@@ -1,5 +1,5 @@
 <admin-card cardTitle="Roles"
-            icon="tags"
+            icon="fa fa-fw fa-tags"
             [createButton]="service.getCardButtons()"
             (action)="create()">
   <table *ngIf="items"
@@ -13,17 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
-        <td class="text-right"
-            nowrap>
-          <button type="button"
-                  class="btn btn-secondary btn-sm"
-                  (click)="handleAction({ type: 'viewUsers', payload: item})">
-              <i class="fa fa-fw fa-search"></i>
-              Users
-              <span class="badge badge-success">{{ item?.principals?.length || 0 | number }}</span>
-          </button>
+        <td nowrap>
           <button type="button"
                   class="btn btn-primary btn-sm"
                   (click)="handleAction({ type: 'update', payload: item})">
@@ -35,6 +25,8 @@
             <i class="fa fa-fw fa-trash-o"></i>
           </button>
         </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
       </tr>
     </tbody>
   </table>

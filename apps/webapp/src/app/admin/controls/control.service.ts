@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { AdminUi } from '@ngx-plus/admin-ui';
-import { Observable } from 'rxjs/Observable';
-import { sortBy } from 'lodash';
+import { Injectable } from '@angular/core'
+import { Subscription } from 'rxjs/Subscription'
+import { AdminUi } from '@ngx-plus/admin-ui'
+import { Observable } from 'rxjs/Observable'
+import { sortBy } from 'lodash'
 
-import { SDKModels, RoleApi, Models, Role } from '@ngx-plus/admin-sdk';
+import { SDKModels, RoleApi, Models, Role } from '@ngx-plus/admin-sdk'
 
 @Injectable()
 export class ControlService {
 
-  private subscriptions: Subscription[] = new Array<Subscription>();
-  models: Models;
-  roles: Role[];
+  private subscriptions: Subscription[] = new Array<Subscription>()
+  models: Models
+  roles: Role[]
 
   constructor(
     private adminUi: AdminUi,
     private sdkModels: SDKModels,
     private roleApi: RoleApi
   ) {
-    this.getModels();
+    this.getModels()
   }
 
   getCardButtons(): { class: string, icon: string, text: string } {
@@ -26,7 +26,7 @@ export class ControlService {
       class: 'btn btn-success btn-block float-right mt-3',
       icon: 'plus',
       text: 'Create'
-    };
+    }
   }
 
   getTableHeaders(): string[] {
@@ -38,7 +38,7 @@ export class ControlService {
       'Principal Type',
       'Principal ID',
       'Actions'
-    ];
+    ]
   }
 
   getFormConfig(formType: string, options?: any): any {
@@ -46,22 +46,22 @@ export class ControlService {
       fields: this.getFormFields(formType, options),
       showCancel: true,
       action: formType === 'create' ? formType : 'update',
-    };
+    }
   }
 
   getModels(): void {
-    const models = this.sdkModels.getAll();
-    this.models = sortBy(Object.keys(models));
+    const models = this.sdkModels.getAll()
+    this.models = sortBy(Object.keys(models))
   }
 
   getFormFields(formType: string, options?: any): any[] {
-    let models = [];
-    let roles = [];
-    const defaultRoles = ['$authenticated', '$everyone', '$owner', '$unauthenticated'];
-    models.push({ label: '*', value: '*' });
-    defaultRoles.forEach((role: any) => (roles.push({ label: role, value: role })));
-    this.models.forEach((model: any) => (models.push({ label: model, value: model })));
-    options.roles.forEach((role: any) => (roles.push({ label: role.name, value: role.name })));
+    let models = []
+    let roles = []
+    const defaultRoles = ['$authenticated', '$everyone', '$owner', '$unauthenticated']
+    models.push({ label: '*', value: '*' })
+    defaultRoles.forEach((role: any) => (roles.push({ label: role, value: role })))
+    this.models.forEach((model: any) => (models.push({ label: model, value: model })))
+    options.roles.forEach((role: any) => (roles.push({ label: role.name, value: role.name })))
     let fields = [
       this.adminUi.form.select('model', {
         label: 'Model',
@@ -155,8 +155,8 @@ export class ControlService {
         },
         options: roles
       }),
-    ];
-    return fields;
+    ]
+    return fields
   }
 
 }
