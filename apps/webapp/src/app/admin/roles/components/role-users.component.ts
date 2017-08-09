@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { RoleApi, Role } from '@ngx-plus/admin-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
@@ -8,12 +8,6 @@ import { RolesService } from '../roles.service'
 @Component({
   selector: 'admin-role-users',
   templateUrl: './role-users.component.html',
-  styles: [`
-      .dropdown-menu {
-        left: auto;
-        right: 0;
-      }
-    `]
 })
 export class RoleUsersComponent implements OnInit, OnDestroy {
 
@@ -36,7 +30,7 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
 
   constructor(
     public service: RolesService,
-    public ui: AdminUi,
+    public ui: NgxUiService,
   ) {
     this.subscriptions = []
   }

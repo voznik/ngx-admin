@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UserActions } from '../../../state'
@@ -26,7 +26,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     public service: UsersService,
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private router: Router,
     private store: Store<any>,
   ) {

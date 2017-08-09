@@ -5,7 +5,7 @@ import { Effect, Actions } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { AccountApi, LoopBackAuth } from '@ngx-plus/admin-sdk'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/let'
@@ -22,7 +22,7 @@ export class AuthEffects {
     private actions$: Actions,
     private store: Store<any>,
     private userApi: AccountApi,
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private auth: LoopBackAuth,
     private router: Router,
   ) { }
@@ -79,6 +79,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   logoutSuccess = this.actions$
     .ofType(Auth.LOG_OUT_SUCCESS)
+    .do((action: Auth.LogInSuccess) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutSuccess) => this.ui.toastSuccess('Log Out Success', `You have logged out successfully.`))
 
   @Effect({ dispatch: false })

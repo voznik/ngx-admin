@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RealTime, FireLoopRef, Todo } from '@ngx-plus/admin-sdk';
 import { Subscription } from 'rxjs/Subscription';
-import { AdminUi } from '@ngx-plus/admin-ui';
+import { NgxUiService } from '@ngx-plus/ngx-ui';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class TodoService {
   public subscriptions: Subscription[] = new Array<Subscription>();
 
   constructor(
-    private adminUi: AdminUi,
+    private adminUi: NgxUiService,
   ) { }
 
   getCardButtons() {

@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminUi, NavItem } from '@ngx-plus/admin-ui';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core'
+import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
+import { Subscription } from 'rxjs/Subscription'
 
-import { AccountApi } from '@ngx-plus/admin-sdk';
+import { AccountApi } from '@ngx-plus/admin-sdk'
 
 @Component({
   selector: 'admin-home',
@@ -13,12 +13,12 @@ import { AccountApi } from '@ngx-plus/admin-sdk';
 
 })
 export class HomeComponent implements OnDestroy {
-  private authIcon;
-  private sidebarNav: NavItem[];
-  private subscriptions: Subscription[] = new Array<Subscription>();
+  private authIcon
+  private sidebarNav: NavItem[]
+  private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private api: AccountApi,
   ) {
 
@@ -29,7 +29,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
   }
 
 }

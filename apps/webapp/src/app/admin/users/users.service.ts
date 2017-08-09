@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AccountApi, Account, RoleApi, Role, AccessToken } from '@ngx-plus/admin-sdk'
 export { Account as User } from '@ngx-plus/admin-sdk'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -28,7 +28,7 @@ export class UsersService {
   constructor(
     private api: AccountApi,
     private roleApi: RoleApi,
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private store: Store<any>,
   ) {
     this.admin$ = this.store.select('admin')

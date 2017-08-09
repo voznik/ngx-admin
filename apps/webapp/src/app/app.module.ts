@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule } from '@angular/core'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { AdminUiModule, AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiModule, NgxUiService } from '@ngx-plus/ngx-ui'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app.routing'
   imports: [
     BrowserModule,
     CoreModule,
-    AdminUiModule,
+    NgxUiModule,
     StoreModule.forRoot({
       admin: AdminReducer,
       auth: AuthReducer,
@@ -35,7 +35,7 @@ import { AppRoutingModule } from './app.routing'
     AppRoutingModule
   ],
   providers: [
-    AdminUi,
+    NgxUiService,
   ],
   bootstrap: [AppComponent]
 })

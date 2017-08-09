@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Account, AccountApi } from '@ngx-plus/admin-sdk'
 
 @Component({
@@ -21,7 +21,7 @@ export class RegisterComponent {
   public formConfig: {}
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private userApi: AccountApi,
     private router: Router,
   ) {

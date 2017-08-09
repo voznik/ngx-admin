@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { DashCard, AdminUi, NavItem } from '@ngx-plus/admin-ui'
+import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
 import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/admin-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -7,9 +7,7 @@ import 'rxjs/add/operator/map'
 
 @Component({
   selector: 'admin-dashboard',
-  template: `
-    <admin-dash-cards [dashCards]="dashCards"></admin-dash-cards>
-  `,
+  template: `<admin-dash-cards [dashCards]="dashCards"></admin-dash-cards>`,
 })
 
 export class AdminDashboardComponent implements OnInit, OnDestroy {
@@ -18,7 +16,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private users: AccountApi,
     private roles: RoleApi,
     private controls: ACLApi,
@@ -41,7 +39,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
         icon: 'users',
         data: this.users.count().map(c => c.count),
         link: '/admin/users',
-        class: 'primary',
+        class: 'success',
       },
       {
         name: 'Roles',

@@ -1,9 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
-import { AdminUi } from '@ngx-plus/admin-ui';
-import { RealTime, FireLoopRef, Todo } from '@ngx-plus/admin-sdk';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnDestroy } from '@angular/core'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { RealTime, FireLoopRef, Todo } from '@ngx-plus/admin-sdk'
+import { Subscription } from 'rxjs/Subscription'
 
-import { TodoService } from './todo.service';
+import { TodoService } from './todo.service'
 
 @Component({
   selector: 'admin-todo',
@@ -11,42 +11,42 @@ import { TodoService } from './todo.service';
 })
 export class TodoComponent implements OnDestroy {
 
-  private modalRef;
-  public todos: Todo[] = new Array<Todo>();
-  public buttons;
-  private todoRef: FireLoopRef<Todo>;
-  private subscriptions: Subscription[] = new Array<Subscription>();
+  private modalRef
+  public todos: Todo[] = new Array<Todo>()
+  public buttons
+  private todoRef: FireLoopRef<Todo>
+  private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    public adminUi: AdminUi,
+    public adminUi: NgxUiService,
     public todoService: TodoService,
     private rt: RealTime
   ) {
     this.subscriptions.push(
       this.rt.onReady().subscribe(
         (admin: any) => {
-          this.todoRef = this.rt.FireLoop.ref<Todo>(Todo);
+          this.todoRef = this.rt.FireLoop.ref<Todo>(Todo)
           this.subscriptions.push(this.todoRef.on('change').subscribe(
             (todos: Todo[]) => {
-              this.todos = todos;
-            }));
-        }));
-    this.buttons = this.todoService.getCardButtons();
+              this.todos = todos
+            }))
+        }))
+    this.buttons = this.todoService.getCardButtons()
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
   }
 
   showDialog(type, item) {
   }
 
   create() {
-    this.showDialog('create', new Todo());
+    this.showDialog('create', new Todo())
   }
 
   update(todo: Todo) {
-    this.showDialog('update', todo);
+    this.showDialog('update', todo)
   }
 
   delete(todo: Todo) {
@@ -58,8 +58,8 @@ export class TodoComponent implements OnDestroy {
         </p>
       `,
       confirmButtonText: 'Yes, Delete'
-    };
-    this.adminUi.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { });
+    }
+    this.adminUi.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { })
   }
 
   handleAction(event) {
@@ -67,39 +67,39 @@ export class TodoComponent implements OnDestroy {
       case 'create':
         this.subscriptions.push(this.todoRef.create(event.payload).subscribe(
           () => {
-            this.modalRef.close();
-            this.adminUi.toastSuccess('Todo Created', 'The Todo was created successfully.');
+            this.modalRef.close()
+            this.adminUi.toastSuccess('Todo Created', 'The Todo was created successfully.')
           },
           (err) => {
-            this.modalRef.close();
-            this.adminUi.toastError('Create Todo Failed', err.message || err.error.message);
+            this.modalRef.close()
+            this.adminUi.toastError('Create Todo Failed', err.message || err.error.message)
           },
-        ));
-        break;
+        ))
+        break
       case 'update':
         this.subscriptions.push(this.todoRef.upsert(event.payload).subscribe(
           () => {
-            this.modalRef.close();
-            this.adminUi.toastSuccess('Todo Updated', 'The Todo was updated successfully.');
+            this.modalRef.close()
+            this.adminUi.toastSuccess('Todo Updated', 'The Todo was updated successfully.')
           },
           (err) => {
-            this.modalRef.close();
-            this.adminUi.toastError('Update Todo Failed', err.message || err.error.message);
+            this.modalRef.close()
+            this.adminUi.toastError('Update Todo Failed', err.message || err.error.message)
           },
-        ));
-        break;
+        ))
+        break
       case 'delete':
         this.subscriptions.push(this.todoRef.remove(event.payload).subscribe(
           () => {
-            this.adminUi.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.');
+            this.adminUi.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.')
           },
           (err) => {
-            this.adminUi.toastError('Delete Todo Failed', err.message || err.error.message);
+            this.adminUi.toastError('Delete Todo Failed', err.message || err.error.message)
           },
-        ));
-        break;
+        ))
+        break
       default:
-        return console.log('Unknown event action', event);
+        return console.log('Unknown event action', event)
     }
   }
 

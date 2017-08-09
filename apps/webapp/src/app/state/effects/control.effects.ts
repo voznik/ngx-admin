@@ -5,7 +5,7 @@ import { concat } from 'rxjs/observable/concat'
 import { Effect, Actions } from '@ngrx/effects'
 import { Store, Action } from '@ngrx/store'
 import { ACL, ACLApi } from '@ngx-plus/admin-sdk'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import 'rxjs/add/operator/let'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/startWith'
@@ -19,7 +19,7 @@ export class ControlEffects {
     private actions$: Actions,
     private store: Store<any>,
     private controlApi: ACLApi,
-    private ui: AdminUi,
+    private ui: NgxUiService,
   ) { }
 
   @Effect()

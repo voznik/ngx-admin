@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
-import { AdminUi, ModalComponent } from '@ngx-plus/admin-ui'
+import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
 import { Account, AccountApi } from '@ngx-plus/admin-sdk'
 
 import { UsersService } from '../users.service'
@@ -19,7 +19,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   constructor(
     public service: UsersService,
-    public ui: AdminUi,
+    public ui: NgxUiService,
     private api: AccountApi,
     private modal: NgbModal,
     private router: Router,

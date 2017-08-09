@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { NavItem } from '@ngx-plus/admin-ui'
+import { NavItem } from '@ngx-plus/ngx-ui'
 
 import { RolesService } from '../roles.service'
 

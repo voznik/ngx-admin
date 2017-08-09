@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { RoleApi, Role } from '@ngx-plus/admin-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
@@ -36,7 +36,7 @@ export class UserRolesComponent implements OnInit, OnDestroy {
 
   constructor(
     public service: UsersService,
-    public ui: AdminUi,
+    public ui: NgxUiService,
   ) {
     this.subscriptions = []
   }

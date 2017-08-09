@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UsersService } from '../users.service'
@@ -16,7 +16,7 @@ export class UserAccessTokensComponent implements OnInit {
 
   constructor(
     public service: UsersService,
-    public ui: AdminUi,
+    public ui: NgxUiService,
   ) {
     this.subscriptions = []
   }

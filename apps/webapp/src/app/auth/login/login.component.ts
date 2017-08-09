@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { AccountApi } from '@ngx-plus/admin-sdk'
 import { Store } from '@ngrx/store'
 
@@ -26,7 +26,7 @@ export class LoginComponent {
   public formConfig: {}
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private api: AccountApi,
     private router: Router,
     private store: Store<any>,

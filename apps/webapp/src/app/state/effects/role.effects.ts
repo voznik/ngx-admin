@@ -5,7 +5,7 @@ import { concat } from 'rxjs/observable/concat'
 import { Effect, Actions } from '@ngrx/effects'
 import { Store, Action } from '@ngrx/store'
 import { Role, RoleApi } from '@ngx-plus/admin-sdk'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import 'rxjs/add/operator/let'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
@@ -20,7 +20,7 @@ export class RoleEffects {
     private actions$: Actions,
     private store: Store<any>,
     private roleApi: RoleApi,
-    private ui: AdminUi,
+    private ui: NgxUiService,
   ) { }
 
   @Effect()

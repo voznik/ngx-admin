@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Subscription } from 'rxjs/Subscription'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Observable } from 'rxjs/Observable'
 import { sortBy } from 'lodash'
 
@@ -14,7 +14,7 @@ export class ControlService {
   roles: Role[]
 
   constructor(
-    private adminUi: AdminUi,
+    private adminUi: NgxUiService,
     private sdkModels: SDKModels,
     private roleApi: RoleApi
   ) {

@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminUiModule } from '@ngx-plus/admin-ui';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgxUiModule } from '@ngx-plus/ngx-ui'
 
 const modules = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
-  AdminUiModule,
+  NgxUiModule,
 ]
 
 @NgModule({

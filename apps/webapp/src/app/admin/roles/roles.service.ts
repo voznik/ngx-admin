@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AccountApi, Account, RoleApi, Role, AccessToken } from '@ngx-plus/admin-sdk'
 export { Account as Role } from '@ngx-plus/admin-sdk'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -20,15 +20,14 @@ export class RolesService {
   public roles$: Observable<any>
   public selected$: Observable<any>
   public tableColumns = [
-    { field: 'actions', label: 'Actions' },
-    { field: 'name', label: 'Name', action: 'edit' },
+    { field: 'name', label: 'Name', action: 'update' },
     { field: 'description', label: 'Description' },
   ]
 
   constructor(
     private userApi: AccountApi,
     private api: RoleApi,
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private store: Store<any>,
   ) {
     this.admin$ = this.store.select('admin')
@@ -40,7 +39,7 @@ export class RolesService {
 
   getCardButtons() {
     return {
-      class: 'btn btn-success btn-block mt-3',
+      class: 'btn btn-outline-success btn-block focus',
       icon: 'plus',
       text: 'Create'
     }

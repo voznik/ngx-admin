@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { AdminUi } from '@ngx-plus/admin-ui'
+import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UsersService } from '../users.service'
@@ -21,7 +21,7 @@ export class UserPasswordComponent implements OnInit {
 
   constructor(
     public service: UsersService,
-    public ui: AdminUi,
+    public ui: NgxUiService,
     private router: Router,
   ) {
     this.subscriptions = []

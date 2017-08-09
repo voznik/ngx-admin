@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AdminUi, NavItem } from '@ngx-plus/admin-ui'
+import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
 import { RealTime, AccountApi, FireLoopRef, Account, SDKToken } from '@ngx-plus/admin-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
@@ -9,7 +9,7 @@ import { AuthService } from './auth.service'
 @Component({
   selector: 'admin-auth',
   template: `
-    <div class="row align-items-center justify-content-center">
+    <div class="row align-items-center justify-content-center auth-root">
       <div class="col-12 col-lg-6">
         <admin-card [nav]="nav"
                     [headerImg]="data.headerImg"
@@ -21,11 +21,8 @@ import { AuthService } from './auth.service'
     </div>
   `,
   styles: [`
-    .row {
+    .auth-root {
       height: 75vh
-    }
-    .card-header hr {
-        border-color: transparent
     }
     `]
 })
@@ -39,14 +36,12 @@ export class AuthComponent implements OnInit, OnDestroy {
   public data: any
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private auth: AuthService,
     private rt: RealTime,
     public userApi: AccountApi,
     public router: Router,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.ui.deactivateSidebar()

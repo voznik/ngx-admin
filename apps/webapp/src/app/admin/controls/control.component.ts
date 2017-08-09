@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { RealTime, FireLoopRef, ACL, Role } from '@ngx-plus/admin-sdk'
-import { AdminUi, ModalComponent } from '@ngx-plus/admin-ui'
+import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { ControlService } from './control.service'
@@ -21,7 +21,7 @@ export class ControlComponent implements OnDestroy {
 
   constructor(
     private modal: NgbModal,
-    public ui: AdminUi,
+    public ui: NgxUiService,
     public service: ControlService,
     private rt: RealTime,
   ) {

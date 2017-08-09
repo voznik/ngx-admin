@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { DashCard, AdminUi, NavItem } from '@ngx-plus/admin-ui'
+import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
 import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/admin-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    private ui: AdminUi,
+    private ui: NgxUiService,
     private users: AccountApi,
     private roles: RoleApi,
     private controls: ACLApi,
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         { name: 'Admin', link: '/dashboard/admin', icon: 'fa fa-fw fa-lock' }
       ]
     }
+    this.ui.activateHeader()
     this.setDashCards()
   }
 

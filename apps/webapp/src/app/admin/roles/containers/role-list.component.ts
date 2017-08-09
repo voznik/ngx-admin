@@ -2,25 +2,36 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
-import { AdminUi, ModalComponent } from '@ngx-plus/admin-ui'
-import { Account, AccountApi } from '@ngx-plus/admin-sdk'
+import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
+import { Role, RoleApi } from '@ngx-plus/admin-sdk'
+import { orderBy, values, includes, filter, isMatch, keysIn } from 'lodash'
 
 import { RolesService } from '../roles.service'
 
 @Component({
   selector: 'admin-role-list',
-  templateUrl: './role-list.component.html',
+  template: `
+    <admin-card cardTitle="Roles"
+                icon="fa fa-fw fa-tags"
+                [createButton]="service.getCardButtons()"
+                (action)="create()">
+      <ngx-grid [columns]="service.tableColumns"
+                 [items]="items"
+                 (action)="handleAction($event)">
+      </ngx-grid>
+    </admin-card>
+  `,
 })
 export class RoleListComponent implements OnInit, OnDestroy {
 
-  public items: Account[]
+  public items: Role[]
   private modalRef: any
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
     public service: RolesService,
-    public ui: AdminUi,
-    private api: AccountApi,
+    public ui: NgxUiService,
+    private api: RoleApi,
     private modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
@@ -28,10 +39,12 @@ export class RoleListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.push(
-      this.service.roles$
-        .subscribe(
-        (items) => this.items = items.ids.map(id => items.entities[id]),
-        (error: any) => this.ui.toastError('Failed to Retrieve Roles', error.message)))
+      this.service.roles$.subscribe(
+        (items) => {
+          this.items = items.ids.map(id => items.entities[id])
+        },
+        (error: any) => this.ui.toastError('Failed to Retrieve Roles', error.message)
+      ))
   }
 
   ngOnDestroy() {
@@ -48,8 +61,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
         this.modalRef.componentInstance.title = 'Create Role'
         break
       default:
-        console.log('Unknown Type', type)
-        break
+        return console.log('$modal', type)
     }
     this.subscriptions.push(
       this.modalRef.componentInstance.action
@@ -57,7 +69,7 @@ export class RoleListComponent implements OnInit, OnDestroy {
   }
 
   create() {
-    this.showDialog('create', new Account())
+    this.showDialog('create', new Role())
   }
 
   handleAction(event) {
@@ -75,10 +87,10 @@ export class RoleListComponent implements OnInit, OnDestroy {
         return this.router.navigate([event.payload.id, 'users'], { relativeTo: this.route.parent })
       case 'delete':
         const successCb = () => this.service.delete(event.payload)
-        const question = { title: 'Are you sure?', text: 'The action cannot be undone.' }
+        const question = { title: 'Are you sure?', text: 'This action cannot be undone.' }
         return this.ui.alertError(question, successCb, () => ({}))
       default:
-        return console.log('Unknown Event Action', event)
+        return console.log('$event', event)
     }
   }
 
