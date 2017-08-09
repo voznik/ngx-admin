@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { FormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { AdminUiModule } from '@ngx-plus/admin-ui'
+
+import { SharedModule } from '../shared.module'
 
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
@@ -18,10 +17,8 @@ const components = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
     RouterModule,
-    AdminUiModule,
+    SharedModule,
     AuthRoutingModule
   ],
   declarations: [

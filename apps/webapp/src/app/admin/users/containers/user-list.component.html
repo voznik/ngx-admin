@@ -1,7 +1,5 @@
 <admin-card cardTitle="Users"
-            icon="fa fa-fw fa-users"
-            [createButton]="service.getCardButtons()"
-            (action)="create()">
+            icon="fa fa-fw fa-users">
   <table *ngIf="items"
          class="table table-striped table-sm"
          [class.table-responsive]="!ui.isLargeScreen">
