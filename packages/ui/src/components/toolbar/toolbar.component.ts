@@ -85,6 +85,8 @@ export class ToolbarComponent {
 
   @Output() action = new EventEmitter()
 
+  public search: string
+
   constructor() { }
 
 }
